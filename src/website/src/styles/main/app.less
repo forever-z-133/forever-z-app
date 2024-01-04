@@ -1,0 +1,20 @@
+@import "../themes/light-theme.less";
+@import "../themes/dark-theme.less";
+
+html {
+  &,
+  &[data-theme="light"] {
+    .light-theme();
+  }
+
+  &[data-theme="dark"] {
+    .dark-theme();
+  }
+}
+
+html {
+  color: @base-text-color;
+  font-size: @base-text-font-size;
+  line-height: @base-text-line-height;
+  background-color: @base-backgroundColor;
+}

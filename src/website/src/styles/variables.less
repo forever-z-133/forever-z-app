@@ -1,0 +1,44 @@
+/**
+ * 可使用以下正则，快速替换变量
+ * 搜索：\s+--([^:]*): ?([^;]*);
+ * 替换：@$1: var(--$1);
+ */
+
+// ------------------- Main -------------------
+@primary-color: var(--primary-color); // 主色调
+@margin: var(--base-margin);
+@base-text-font-size: var(--base-text-font-size);
+@base-text-line-height: var(--base-text-line-height);
+@base-article-line-height: var(--base-article-line-height);
+
+// ------------------- TextColor -------------------
+@base-text-color: var(--base-text-color); // Base 文字颜色
+@fail-text-color: var(--fail-text-color);
+@pass-text-color: var(--pass-text-color);
+@header-text-color: var(--header-text-color);
+@button-text-color: var(--button-text-color);
+
+// ------------------- Background -------------------
+@loading-backgroundColor: var(--loading-backgroundColor);
+@base-backgroundColor: var(--base-backgroundColor);
+@content-backgroundColor: var(--content-backgroundColor);
+@header-backgroundColor: var(--header-backgroundColor);
+@table-backgroundColor: var(--table-backgroundColor);
+@table-header-backgroundColor: var(--table-header-backgroundColor);
+@input-backgroundColor: var(--input-backgroundColor);
+@dialog-backgroundColor: var(--dialog-backgroundColor);
+@dialog-header-backgroundColor: var(--dialog-header-backgroundColor);
+@button-backgroundColor: var(--button-backgroundColor);
+
+// ------------------- Hover / Active -------------------
+@hover-color: var(--hover-color);
+
+// ------------------- BorderColor -------------------
+@base-border-color: var(--base-border-color);
+@disable-border-color: var(--disable-border-color);
+@content-border-color: var(--content-border-color);
+@title-border-color: var(--title-border-color);
+@table-border-color: var(--table-border-color);
+@button-border-color: var(--button-border-color);
+@input-border-color: var(--input-border-color);
+@dialog-border-Color: var(--dialog-border-Color);
