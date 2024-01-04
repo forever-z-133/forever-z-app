@@ -2,5 +2,16 @@
   "name": "scripts",
   "type": "module",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "bin": {
+    "forever-z": ".bin/cli.mjs"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+    "cross-spawn": "^7.0.3",
+    "fs-extra": "^11.2.0",
+    "lodash-es": "^4.17.21",
+    "typescript": "^5.3.3"
+  }
 }

@@ -8,11 +8,14 @@
     "dev": "pnpm run --filter website dev",
     "dev:web": "pnpm run --filter website dev:web",
     "build": "pnpm run --filter website build",
-    "build:web": "pnpm run --filter website build:web"
+    "build:web": "pnpm run --filter website build:web",
+    "test": "vitest run",
+    "test:dev": "vitest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.1",
     "eslint": "^8.56.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
   }
 }
