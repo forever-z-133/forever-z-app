@@ -65,7 +65,7 @@ export default defineConfig(({ command, mode }) => {
     },
     resolve: {
       alias: {
-        '@/': join(thisDir, './src/'),
+        '@': join(thisDir, 'src'),
       },
     },
     css: {
