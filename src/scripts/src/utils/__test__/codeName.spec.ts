@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { convertCodeName, getCodeName, removeCodeNamePart } from '../codeName'
 
-describe('constants/movieName.ts', () => {
+describe('utils/codeName.ts', () => {
   it('getCodeName', async () => {
     expect(getCodeName('FC2PPV 4172579 ★特典で無修正と膣内カメラ ♀92 初撮り★2023年最後は美乳美BODY、透き通る白さのピュアな素人との中出..')).toBe('FC2PPV 4172579')
     expect(getCodeName('VKO-2464 working woman 私のお尻は魅力的なんです')).toBe('VKO-2464')
