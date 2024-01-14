@@ -1,5 +1,5 @@
-import { join } from 'node:path'
-import { readdirSync, statSync } from 'fs-extra'
+import { join, normalize } from 'node:path'
+import { readdirSync, statSync } from 'node:fs'
 import { ignorePaths } from '../../config'
 
 type FileCallback = (uri: string) => void
@@ -7,12 +7,12 @@ type DirCallback = (uri: string) => boolean | any
 
 /**
  * 遍历文件夹中所有文件（包括子文件夹）
- * @param dir {string} 文件夹地址
+ * @param {string} dir 文件夹地址
  * @param fileCallback 遇到文件时的回调
- * @param dirCallback 遇到子文件夹时的回调
+ * @param dirCallback 遇到子文件夹时的回调（可返回 false 跳过此文件夹）
  */
 export function findDeep(dir: string, fileCallback?: FileCallback, dirCallback?: DirCallback): void {
-  const files: string[] = readdirSync(dir)
+  const files: string[] = readdirSync(normalize(dir))
   files.forEach((file) => {
     const uri = join(dir, file)
     const stat = statSync(uri)
@@ -30,9 +30,9 @@ export function findDeep(dir: string, fileCallback?: FileCallback, dirCallback?:
 }
 
 /**
- * 获取文件夹中所有文件的路径
- * 其中会跳过 ignorePaths 相关的内容
- * @param dir 文件夹地址
+ * 获取文件夹中所有文件的路径,
+ * 其中会自动跳过 ignorePaths 相关的内容
+ * @param {string} dir 文件夹地址
  * @returns {string[]} 所有文件的路径
  */
 export function getAllFiles(dir: string): string[] {

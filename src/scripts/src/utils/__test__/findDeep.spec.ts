@@ -15,7 +15,7 @@ describe('utils/findDeep.ts', () => {
      *  - c 文件
      *  - d 文件夹
      */
-    vi.mock('fs-extra', async (importOriginal) => {
+    vi.mock('node:fs', async (importOriginal) => {
       const original: any = await importOriginal()
       return {
         ...original,

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "dev": "pnpm run --filter website dev",
     "dev:web": "pnpm run --filter website dev:web",
     "build": "pnpm run --filter website build",
@@ -13,7 +13,7 @@
     "test:dev": "vitest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.6.1",
+    "@antfu/eslint-config": "^2.6.2",
     "eslint": "^8.56.0",
     "typescript": "^5.3.3",
     "vitest": "^1.1.1"

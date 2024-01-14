@@ -4,14 +4,20 @@
   "version": "0.0.0",
   "private": true,
   "bin": {
-    "forever-z": ".bin/cli.mjs"
+    "forZ": ".bin/cli.mjs"
   },
   "scripts": {
+    "rename": "cross-env RUN_BY=scripts tsx src/renameCodes.ts"
   },
   "devDependencies": {
+    "chalk": "5.3.0",
+    "cross-env": "7.0.3",
     "cross-spawn": "^7.0.3",
     "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.12",
     "lodash-es": "^4.17.21",
+    "tsx": "^4.7.0",
+    "types": "workspace:types",
     "typescript": "^5.3.3"
   }
 }

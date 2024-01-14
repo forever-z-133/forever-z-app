@@ -2,6 +2,8 @@ import { join } from 'node:path'
 import { BrowserWindow, app } from 'electron'
 import installDefaultExtension from './src/utils/installDefaultExtension'
 
+const isDev = process.env.NODE_ENV === 'development'
+
 function createWindow() {
   installDefaultExtension()
 
@@ -11,10 +13,10 @@ function createWindow() {
     transparent: true,
     webPreferences: {
       preload: join(__dirname, './preload.js'),
-      devTools: process.env.NODE_ENV === 'development',
+      devTools: isDev,
     },
   })
-  win.webContents.openDevTools({ mode: 'right' })
+  isDev && win.webContents.openDevTools({ mode: 'right' })
 
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL)
@@ -27,7 +29,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow()
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })

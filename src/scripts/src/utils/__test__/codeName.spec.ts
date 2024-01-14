@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { convertCodeName, getCodeName, removeCodeNamePart } from '../codeName'
+import {
+  convertCodeName,
+  getCodeName,
+  isContinuousCodes,
+  removeCodeNamePart,
+} from '../codeName'
 
 describe('utils/codeName.ts', () => {
   it('getCodeName', async () => {
@@ -23,5 +28,13 @@ describe('utils/codeName.ts', () => {
   it('removeCodeNamePart', async () => {
     expect(removeCodeNamePart('SNIS-432')).toBe('SNIS-432')
     expect(removeCodeNamePart('SNIS-432A')).toBe('SNIS-432')
+  })
+
+  it('isContinuousCodes', async () => {
+    expect(isContinuousCodes(['SNIS-432A', 'SNIS-432B'])).toBe(true)
+    expect(isContinuousCodes([])).toBe(true)
+    expect(isContinuousCodes(['SNIS-432A'])).toBe(true)
+    expect(isContinuousCodes(['SNIS-432'])).toBe(false)
+    expect(isContinuousCodes(['SNIS-432A', 'SNIS-432C'])).toBe(false)
   })
 })
