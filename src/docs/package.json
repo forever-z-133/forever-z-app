@@ -1,11 +1,6 @@
 {
   "name": "docs",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "main": "index.js",
+  "version": "0.0.0",
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build"
@@ -18,6 +13,7 @@
     "@storybook/test": "^7.6.8",
     "@storybook/vue3": "^7.6.8",
     "@storybook/vue3-vite": "^7.6.8",
+    "common": "workspace:common",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.8",

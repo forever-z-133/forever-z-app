@@ -4,6 +4,7 @@
     "Vue.vscode-typescript-vue-plugin",
     "streetsidesoftware.code-spell-checker",
     "dbaeumer.vscode-eslint",
-    "mrmlnc.vscode-json5"
+    "mrmlnc.vscode-json5",
+    "unifiedjs.vscode-mdx"
   ]
 }
