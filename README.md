@@ -3,18 +3,29 @@
 
 ## 如何使用
 
+### 桌面应用开发
+
 ```shell
 # 安装依赖
 pnpm i
 
 # 启动桌面应用
 pnpm run dev
-
 # 仅启动网页
 pnpm run dev:web
 
 # 打包桌面应用
 pnpm run build
+```
+
+### 自定义脚本
+
+```shell
+# 注册到全局
+cd src/scripts && npm link
+
+# 使用脚本
+forZ check
 ```
 
 ## 注意事项
@@ -29,9 +40,25 @@ pnpm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
 
 ## todo list
 
-- [ ] 项目打包
-- [x] `electron` 的初始化
+- [ ] 桌面端版本与更新问题
+- [ ] 桌面端打包
+- [ ] 桌面端与网页端互通
+  - [ ] IPC 通讯
+  - [ ] stdout 问题
+  - [ ] 多窗口问题
+- [ ] 脚本实现
+  - [x] 番号名称规范化
+  - [x] 番号名称规范检查
+  - [ ] 番号查找
+  - [ ] 番号链接提取
+  - [ ] 番号删除并缓存进已下载
+  - [ ] 影片合并
+  - [ ] 删除空文件夹
+  - [ ] 删除指定格式的所有文件
+- [x] 文档与组件演示
 - [x] 主题切换功能
+- [x] 桌面端的初始化
+- [x] 网页端的初始化
 - [x] `tsconfig.json` 的配置
 - [x] `eslint` 的配置
 - [x] `pnpm workspace` 的初始化
