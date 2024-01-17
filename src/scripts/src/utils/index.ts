@@ -19,3 +19,18 @@ export function addZero(num: number | string, len: number = 2): string {
 export function isNumberString(str: string): boolean {
   return !Number.isNaN(Number.parseFloat(str))
 }
+
+/**
+ * 缓存函数返回值，重复调用读取缓存
+ * @param fn 需处理的函数
+ * @returns 可重复调用的函数
+ */
+export function useCache<T>(fn: any) {
+  const cache = {}
+  return function (...args: any[]): T {
+    const key = args.length + JSON.stringify(args)
+    if (key in cache) return cache[key]
+    cache[key] = fn.apply(fn, args)
+    return cache[key]
+  }
+}

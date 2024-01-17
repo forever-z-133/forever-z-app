@@ -35,7 +35,7 @@ export function findDeep(dir: string, fileCallback?: FileCallback, dirCallback?:
  * @param {string} dir 文件夹地址
  * @returns {string[]} 所有文件的路径
  */
-export function getAllFiles(dir: string): string[] {
+export function getDeepFiles(dir: string): string[] {
   const files: string[] = []
   findDeep(dir, (file) => {
     files.push(file)

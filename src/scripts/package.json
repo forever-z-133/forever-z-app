@@ -7,6 +7,7 @@
     "forZ": ".bin/cli.mjs"
   },
   "scripts": {
+    "check": "cross-env RUN_BY=scripts tsx src/checkCodes.ts",
     "rename": "cross-env RUN_BY=scripts tsx src/renameCodes.ts"
   },
   "devDependencies": {

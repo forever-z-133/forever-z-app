@@ -2,6 +2,7 @@
  * 番号所在的文件夹
  */
 export const codeDirs = [
+  // 'E:/test',
   'F:/坏',
   'E:/下载3',
   'F:/无码',

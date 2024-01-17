@@ -1,7 +1,7 @@
 import { format, normalize, parse } from 'node:path'
 import { renameSync } from 'node:fs'
 import chalk from 'chalk'
-import { getAllFiles } from './utils/findDeep'
+import { getDeepFiles } from './utils/findDeep'
 import { askText } from './utils/question'
 import { convertCodeName, isContinuousCodes, removeCodeNamePart } from './utils/codeName'
 
@@ -9,9 +9,10 @@ import { convertCodeName, isContinuousCodes, removeCodeNamePart } from './utils/
  * 将单个文件夹里的所有番号名规范化
  * @example 比如将 'snisadd432un' 转为 'SNIS-432'
  * @param dir 要处理的文件夹
+ * @returns 番号数据 { pass: [file, code], change: [file, code], fail: [file, code, conflict] }
  */
-function renameCodes(dir: string): void {
-  const files = getAllFiles(dir)
+export function getRenameCodesData(dir: string) {
+  const files = getDeepFiles(dir)
 
   const pass: [string, string][] = [] // 无变化的番号
   const change: [string, string][] = [] // 正常转换的番号
@@ -22,7 +23,7 @@ function renameCodes(dir: string): void {
   // 获取规范化后的番号
   const codes = fileNames.map(name => convertCodeName(name))
   // 番号去除结尾，方便查重
-  const pureCodes = codes.map(name => removeCodeNamePart(name))
+  const pureCodes = codes.map(code => removeCodeNamePart(code))
 
   // 转为 { [pureCode]: [[code, file]] } 格式，方便查重
   const uniqueMap = codes.reduce((re, code, index) => {
@@ -33,6 +34,7 @@ function renameCodes(dir: string): void {
     return re
   }, {})
 
+  // 开始判断需重命名的番号
   codes.forEach((code, index) => {
     const name = fileNames[index]
     const file = files[index]
@@ -71,26 +73,16 @@ function renameCodes(dir: string): void {
     change.push([file, code])
   })
 
-  // 最终处理，打印结果 & 重命名文件
-  pass.forEach(([file, code]) => {
-    console.log(chalk.green('不变'), code.padEnd(12, ' '), file)
-  })
-  change.forEach(([file, code]) => {
-    console.log(chalk.yellow('改变'), code.padEnd(12, ' '), file)
-    renameFileByNewCode(file, code)
-  })
-  fail.forEach(([file, code, matcher]) => {
-    console.log(chalk.red('错误'), code.padEnd(12, ' '), file, matcher.join(' '))
-  })
+  return { pass, change, fail }
 }
-export default renameCodes
+export default getRenameCodesData
 
 /**
  * 将该文件以规范化番号重命名
  * @param file 文件路径
  * @param code 番号
  */
-function renameFileByNewCode(file: string, code: string): void {
+export function renameFileByNewCode(file: string, code: string): void {
   const { dir, ext } = parse(file)
   const target = format({ dir, name: code, ext })
   renameSync(file, target)
@@ -104,6 +96,17 @@ function renameFileByNewCode(file: string, code: string): void {
     const args = process.argv.slice(2)
     const [dirByCli] = args
     const dir = dirByCli ? normalize(dirByCli) : await askText('进行重命名的文件夹：')
-    renameCodes(dir)
+    const { pass, change, fail } = getRenameCodesData(dir)
+    // 最终处理，打印结果 & 重命名文件
+    pass.forEach(([file, code]) => {
+      console.log(chalk.green('不变'), code.padEnd(12, ' '), file)
+    })
+    change.forEach(([file, code]) => {
+      console.log(chalk.yellow('改变'), code.padEnd(12, ' '), file)
+      renameFileByNewCode(file, code)
+    })
+    fail.forEach(([file, code, matcher]) => {
+      console.log(chalk.red('错误'), code.padEnd(12, ' '), file, matcher.join(' '))
+    })
   }
 })()

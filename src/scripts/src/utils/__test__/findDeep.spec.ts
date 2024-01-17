@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { getAllFiles } from '../findDeep'
+import { getDeepFiles } from '../findDeep'
 
 describe('utils/findDeep.ts', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
 
-  it('getAllFiles', async () => {
+  it('getDeepFiles', async () => {
     /**
      * 创造出以下文件结构
      * - test 文件夹
@@ -23,6 +23,6 @@ describe('utils/findDeep.ts', () => {
         readdirSync: vi.fn(uri => ({ 'test': ['a', 'c', 'd'], 'test\\a': ['b'], 'test\\d': [] })[uri]),
       }
     })
-    expect(getAllFiles('test')).toMatchObject(['test\\a\\b', 'test\\c'])
+    expect(getDeepFiles('test')).toMatchObject(['test\\a\\b', 'test\\c'])
   })
 })
