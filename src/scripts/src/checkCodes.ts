@@ -29,6 +29,7 @@ export function getConflictCodesData() {
     const pureCodeB = pureCodes[index]
 
     // 若存在冲突，则拼凑成 [pureCode, [file]] 格式
+    // TODO: 若两个同名且连续，但文件后缀不同，该情况应当属于正确
     // TODO: 若三个同名，但两个正常一个异常，该情况未处理
     if (pureCodeA === pureCodeB && isConflict(a, b)) {
       const fileA = format(a)

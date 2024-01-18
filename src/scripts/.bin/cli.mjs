@@ -1,3 +1,35 @@
 #!/usr/bin/env node
+import { dirname, resolve } from 'node:path'
+import { program } from 'commander'
+import fsExtra from 'fs-extra'
+import { spawn } from 'cross-spawn'
 
-console.log('hello')
+const { readJSONSync } = fsExtra
+
+const thisDir = dirname(process.argv[1])
+const scriptsRootDir = resolve(thisDir, '..')
+
+const pkgPath = resolve(scriptsRootDir, 'package.json')
+const pkg = readJSONSync(pkgPath)
+
+program
+  .name('forZ')
+  .description('来自 forever-z-133 的脚本')
+  .version(pkg.version)
+
+program
+  .command('check')
+  .description('番号名称规范检查')
+  .action(() => run('check'))
+
+program
+  .command('rename')
+  .description('番号名称规范化')
+  .argument('[fileDir]', '需操作的文件夹')
+  .action(fileDir => run('rename', fileDir))
+
+program.parse()
+
+function run(command, ...args) {
+  spawn('npm', ['run', command, ...args.filter(a => a && a !== 'undefined')], { stdio: 'inherit', cwd: scriptsRootDir })
+}

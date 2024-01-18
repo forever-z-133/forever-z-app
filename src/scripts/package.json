@@ -11,8 +11,9 @@
     "rename": "cross-env RUN_BY=scripts tsx src/renameCodes.ts"
   },
   "devDependencies": {
-    "chalk": "5.3.0",
-    "cross-env": "7.0.3",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "fs-extra": "^11.2.0",
     "inquirer": "^9.2.12",

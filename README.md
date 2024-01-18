@@ -46,6 +46,7 @@ pnpm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
   - [ ] IPC 通讯
   - [ ] stdout 问题
   - [ ] 多窗口问题
+- [x] 脚本全局调用
 - [ ] 脚本实现
   - [x] 番号名称规范化
   - [x] 番号名称规范检查
