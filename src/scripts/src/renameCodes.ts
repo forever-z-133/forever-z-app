@@ -99,14 +99,14 @@ export function renameFileByNewCode(file: string, code: string): void {
     const { pass, change, fail } = getRenameCodesData(dir)
     // 最终处理，打印结果 & 重命名文件
     pass.forEach(([file, code]) => {
-      console.log(chalk.green('不变'), code.padEnd(12, ' '), file)
+      console.log(chalk.green('不变'), code.padEnd(12, ' '), chalk.gray(file))
     })
     change.forEach(([file, code]) => {
-      console.log(chalk.yellow('改变'), code.padEnd(12, ' '), file)
+      console.log(chalk.yellow('改变'), code.padEnd(12, ' '), chalk.gray(file))
       renameFileByNewCode(file, code)
     })
     fail.forEach(([file, code, matcher]) => {
-      console.log(chalk.red('错误'), code.padEnd(12, ' '), file, matcher.join(' '))
+      console.log(chalk.red('错误'), code.padEnd(12, ' '), chalk.gray(file), chalk.gray(matcher.join(' ')))
     })
   }
 })()

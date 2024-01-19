@@ -1,63 +1,85 @@
-import { format, parse } from 'node:path'
+import { parse } from 'node:path'
 import type { ParsedPath } from 'node:path'
 import chalk from 'chalk'
+import { groupBy, omitBy, pickBy } from 'lodash-es'
 import { getAllCodeFiles } from './utils/getAllCodeFiles'
-import { convertCodeName, removeCodeNamePart } from './utils/codeName'
+import { convertCodeName, isContinuousCodes, removeCodeNamePart } from './utils/codeName'
+
+type Conflict = [string, string[]] // [code, [file]]
+type CodeData = [string, ParsedPath, string, string] // [file, data, code, pureCode]
 
 /**
  * 检查所有番号文件，看是否存在异常
  * @returns 检查结果 [[pureCode, [files]]]
  */
 export function getConflictCodesData() {
-  type Conflict = [string, string[]]
   const conflicts: Conflict[] = []
 
   // 获取所有番号文件
   const files = getAllCodeFiles()
 
-  // 将其按番号字母顺序排序
-  const filesData = files.map(file => parse(file))
-  const sorted = filesData.sort((a, b) => a.name > b.name ? 1 : -1)
+  // 转化整合数据，方便后续进行处理
+  const filesData: CodeData[] = files.map((file) => {
+    const data = parse(file)
+    const code = convertCodeName(data.name)
+    const pureCode = removeCodeNamePart(code)
+    return [file, data, code, pureCode]
+  })
+  const pureCodeMap = groupBy(filesData, (d: CodeData) => d[3])
 
-  // 转化相关数据，方便后续获取与比较
-  const codes = sorted.map(data => convertCodeName(data.name))
-  const pureCodes = codes.map(code => removeCodeNamePart(code))
+  // 判断重复名称相关的冲突
+  const multiPureCode = pickBy(pureCodeMap, (matcher: CodeData[]) => matcher.length > 1)
+  Object.keys(multiPureCode).forEach((pureCode) => {
+    const matcher: CodeData[] = multiPureCode[pureCode]
+    const isConflict = isConflictInRepeatCode(matcher)
 
-  // 开始比较冲突
-  sorted.reduce((a, b, index) => {
-    const pureCodeA = pureCodes[index - 1]
-    const pureCodeB = pureCodes[index]
+    if (!isConflict) return
 
-    // 若存在冲突，则拼凑成 [pureCode, [file]] 格式
-    // TODO: 若两个同名且连续，但文件后缀不同，该情况应当属于正确
-    // TODO: 若三个同名，但两个正常一个异常，该情况未处理
-    if (pureCodeA === pureCodeB && isConflict(a, b)) {
-      const fileA = format(a)
-      const fileB = format(b)
-      const has = conflicts.find(([c]) => c === pureCodeA)
-      if (has) has[1].push(fileB)
-      else conflicts.push([pureCodeA, [fileA, fileB]])
-    }
+    const files = matcher.map(m => m[0])
+    conflicts.push([pureCode, files])
+  })
 
-    return b
+  // 其他名称不重复的冲突
+  const singlePureCode = omitBy(pureCodeMap, Object.keys(multiPureCode))
+  Object.keys(singlePureCode).forEach((pureCode) => {
+    const matcher: CodeData[] = singlePureCode[pureCode]
+    const isConflict = isConflictInSingleCode(matcher)
+
+    if (!isConflict) return
+
+    const [file] = matcher[0]
+    conflicts.push([pureCode, [file]])
   })
 
   return conflicts
 }
 
 /**
- * 判断是否文件是否冲突
- * @example 冲突1：相同名称在不同文件夹下
- * @example 冲突2：相同名称不同后缀
- * @example 冲突3：相同名称一个带分批一个不带分批，或者两个带分批但不连续
- * @param a 文件数据a
- * @param b 文件数据b
+ * 判断重复名称相关的冲突
+ * @example 冲突1：名称相同，但处于不同文件夹，包括正确连续
+ * @example 冲突2：名称相同，但没有正确连续
+ * @example 冲突3：名称相同，但后缀不同，但若正确连续也正确（被冲突2包含）
+ * @param matcher 名称相同的数据
  * @returns 存在冲突
  */
-function isConflict(a: ParsedPath, b: ParsedPath) {
-  if (a.ext !== b.ext) return true
-  if (a.dir !== b.dir) return true
-  if (a.name.slice(-1).charCodeAt(0) - b.name.slice(-1).charCodeAt(0) !== -1) return true
+function isConflictInRepeatCode(matcher: CodeData[]) {
+  const [, { dir }] = matcher[0]
+  const isDifferentDir = matcher.some(([, { dir: d }]) => d !== dir)
+  const isContinuous = isContinuousCodes(matcher.map(m => m[2]))
+  if (isDifferentDir) return true
+  if (!isContinuous) return true
+  return false
+}
+
+/**
+ * 判断单个名称相关的冲突
+ * @example 冲突1：番号不正确，或番号正确但带有其他内容
+ * @param matcher 单个名称的数据
+ * @returns 存在冲突
+ */
+function isConflictInSingleCode(matcher: CodeData[]) {
+  const [, data, code] = matcher[0]
+  if (data.name !== code) return true
   return false
 }
 
@@ -68,7 +90,7 @@ function isConflict(a: ParsedPath, b: ParsedPath) {
   if (process.env.RUN_BY === 'scripts') {
     const codes = getConflictCodesData()
     codes.forEach(([pureCode, files]) => {
-      console.group(chalk.green(pureCode))
+      console.group(chalk.red(pureCode))
       console.log(files.join('\n'))
       console.groupEnd()
     })
