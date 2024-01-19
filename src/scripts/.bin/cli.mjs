@@ -28,6 +28,12 @@ program
   .argument('[fileDir]', '需操作的文件夹')
   .action(fileDir => run('rename', fileDir))
 
+program
+  .command('test')
+  .description('测试脚本')
+  .argument('[args...]', '测试脚本的入参')
+  .action(args => run('test', ...args))
+
 program.parse()
 
 function run(command, ...args) {
