@@ -5,7 +5,7 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
  * 比如 vuejs devtool
  */
 export default function installDefaultExtension() {
-  installExtension(VUEJS_DEVTOOLS)
+  return installExtension(VUEJS_DEVTOOLS)
     .then((name) => {
       console.log(`add extension: ${name}`)
     })
