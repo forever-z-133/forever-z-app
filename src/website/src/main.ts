@@ -2,9 +2,7 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 
-import '@/styles/main/reset.less'
-import '@/styles/main/app.less'
-import '@/styles/main/elRewrite.less'
+import '@/styles/app.less'
 
 async function main() {
   const app = createApp(App)

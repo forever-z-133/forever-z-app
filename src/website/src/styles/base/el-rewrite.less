@@ -1,0 +1,255 @@
+@import "../variables.less";
+
+.el-rewrite() {
+  --el-font-size-base: @global-font-size;
+  --el-font-size-small: @global-font-size-small;
+  --el-font-size-large: @global-font-size-large;
+
+  --el-text-color-regular: @global-text-color;
+  --el-text-color-primary: @global-text-color;
+  --el-color-primary: @primary-color;
+  --el-disabled-text-color: @global-disabled-text-color;
+  --el-text-color-placeholder: @input-placeholder-text-color;
+
+  --el-bg-color: @container-bg-color;
+  --el-fill-color-blank: @container-bg-color;
+  --el-fill-color-light: @header-bg-color;
+
+  --el-border-radius-base: @global-border-radius;
+  --el-border-color: @global-border-color;
+  --el-border-color-light: @global-border-color;
+
+  --el-bg-color-overlay: @container-bg-color;
+  --el-mask-color: @mask-bg-color;
+
+  --el-component-size: @input-height;
+  --el-component-size-small: @input-height-small;
+}
+
+.el-button {
+  padding: @button-padding;
+  height: @button-height;
+  --el-button-bg-color: @button-default-bg-color;
+  --el-button-text-color: @button-default-text-color;
+  --el-button-border-color: @button-default-border-color;
+  --el-button-outline-color: @button-default-border-color;
+  --el-button-disabled-bg-color: @button-default-disabled-bg-color;
+  --el-button-disabled-text-color: @button-default-disabled-text-color;
+  --el-button-disabled-border-color: @button-default-disabled-border-color;
+  --el-button-hover-text-color: @button-default-hover-text-color;
+  --el-button-active-text-color: @button-default-hover-text-color;
+  --el-button-hover-bg-color: @button-default-hover-bg-color;
+  --el-button-active-bg-color: @button-default-hover-bg-color;
+  --el-button-hover-border-color: @button-default-hover-border-color;
+  --el-button-active-border-color: @button-default-hover-border-color;
+  --el-button-active-color: @button-default-hover-text-color;
+  &:focus-visible {
+    outline: none;
+  }
+  &.el-button--small {
+    padding: @button-padding-small;
+  }
+  &.is-link {
+    --el-button-text-color: @button-link-text-color;
+    --el-button-disabled-text-color: @button-link-disabled-text-color;
+    --el-button-active-color: @button-link-hover-text-color;
+    --el-button-hover-link-text-color: @button-link-hover-text-color;
+    padding: @button-link-padding;
+  }
+  &.el-button--primary {
+    --el-button-bg-color: @button-primary-bg-color;
+    --el-button-text-color: @button-primary-text-color;
+    --el-button-border-color: @button-primary-border-color;
+    --el-button-hover-bg-color: @button-primary-hover-bg-color;
+    --el-button-active-bg-color: @button-primary-hover-bg-color;
+    --el-button-hover-text-color: @button-primary-hover-text-color;
+    --el-button-active-text-color: @button-primary-hover-text-color;
+    --el-button-hover-border-color: @button-primary-hover-border-color;
+    --el-button-active-border-color: @button-primary-hover-border-color;
+  }
+}
+
+.el-table {
+  --el-table-header-bg-color: @table-header-bg-color;
+  --el-table-header-text-color: @table-header-text-color;
+  --el-table-bg-color: @table-body-bg-color;
+  --el-table-tr-bg-color: @table-body-bg-color;
+  --el-table-expanded-cell-bg-color: @table-body-bg-color;
+  --el-table-text-color: @table-body-text-color;
+  --el-table-border-color: @table-body-border-color;
+  --el-fill-color-lighter: @table-striped-bg-color;
+  --el-table-current-row-bg-color: @table-hover-bg-color;
+  --el-table-row-hover-bg-color: @table-hover-bg-color;
+  border-radius: @global-border-radius;
+  border: 1px solid @table-container-border-color;
+  & .el-table__inner-wrapper {
+    &::before {
+      display: none;
+    }
+  }
+  & .el-table__cell  {
+    padding: 0 0;
+    & > .cell {
+      padding: @table-padding;
+    }
+  }
+  & .el-table__header {
+    & th.el-table__cell {
+      font-size: @table-header-font-size;
+      font-weight: @table-header-font-weight;
+      border-color: @table-header-border-color;
+    }
+  }
+  & .el-table__body {
+    & tr:last-child {
+      .el-table__cell {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.el-form {
+  .el-form-item__content {
+    display: block;
+  }
+}
+
+.el-input {
+  --el-input-bg-color: @input-bg-color;
+  --el-input-text-color: @input-text-color;
+  --el-input-border-color: @input-border-color;
+  --el-input-hover-border-color: @input-hover-border-color;
+  --el-input-focus-border-color: @input-hover-border-color;
+  & .el-input__wrapper {
+    padding: @input-padding;
+  }
+  & .el-input__inner {
+    --el-input-inner-height: var(--el-component-size);
+    &::placeholder {
+      color: @input-placeholder-text-color;
+    }
+  }
+  &.el-input--small {
+    --el-component-size: @input-height-small;
+  }
+}
+
+.el-select {
+  --el-select-input-font-size: @global-font-size;
+  --el-select-border-color-hover: @input-hover-border-color;
+  --el-select-input-color: @input-placeholder-text-color;
+  --el-select-inner-height: var(--el-component-size);
+  --el-select-width: 160px;
+  & > .el-select__wrapper {
+    min-height: var(--el-select-inner-height);
+    line-height: var(--el-select-inner-height);
+  }
+  &.el-select--small {
+    --el-component-size: @input-height-small;
+  }
+}
+
+.el-popper {
+  --el-popper-border-radius: @global-border-radius;
+  --el-bg-color-overlay: @overlay-bg-color;
+  --el-border-color-light: @overlay-border-color;
+  --el-fill-color-light: @overlay-hover-bg-color;
+  &.is-dark {
+    --el-bg-color: var(--el-text-color-regular);
+    --el-text-color-primary: @overlay-bg-color;
+    --el-popper-border-color: @overlay-border-color;
+    border-color: var(--el-popper-border-color);
+    & .el-popper__arrow::before {
+      border-color: var(--el-popper-border-color);
+    }
+  }
+}
+
+.el-dropdown__popper,
+.el-dropdown {
+  --el-dropdown-menuItem-hover-fill: @overlay-hover-bg-color;
+  --el-dropdown-menuItem-hover-color: @overlay-hover-text-color
+}
+
+.el-dialog {
+  --el-dialog-title-font-size: @dialog-header-font-size;
+  --el-dialog-content-font-size: @global-font-size;
+  --el-dialog-border-radius: @global-border-radius;
+  --el-dialog-padding-primary: @dialog-body-padding;
+  --el-dialog-bg-color: @dialog-body-bg-color;
+  & .el-dialog__header {
+    padding: @dialog-header-padding;
+    height: @dialog-header-height;
+    background-color: @dialog-header-bg-color;
+    color: @dialog-header-text-color;
+    text-align: @dialog-header-text-align;
+    border-bottom: 1px solid @dialog-header-border-color;
+    margin-right: 0;
+    border-top-left-radius: var(--el-dialog-border-radius);
+    border-top-right-radius: var(--el-dialog-border-radius);
+  }
+  & .el-dialog__title {
+    line-height: @dialog-header-height;
+    color: inherit;
+  }
+  & .el-dialog__headerbtn {
+    width: @dialog-header-height;
+    height: @dialog-header-height;
+    top: 0;
+  }
+  .el-dialog__footer {
+    padding: 10px 20px;
+    border-top: 1px solid @dialog-footer-border-color;
+  }
+}
+
+.el-range-editor {
+  --el-input-height: auto;
+  .el-range-input {
+    height: @input-height;
+    line-height: @input-height;
+  }
+  .el-range-separator {
+    color: @input-placeholder-text-color;
+  }
+}
+
+.el-upload {
+  --el-upload-dragger-padding-horizontal: 20px;
+  --el-upload-dragger-padding-vertical: 10px;
+}
+
+.el-tag {
+  --el-tag-font-size: @tag-font-size;
+  --el-tag-border-radius: @tag-border-radius;
+  --el-icon-size: @tag-close-size;
+  height: @tag-height;
+  padding: @tag-padding;
+  border: 1px solid var(--el-tag-border-color);
+  &,
+  &.el-tag--info {
+    --el-tag-bg-color: @tag-bg-color;
+    --el-tag-text-color: @tag-text-color;
+    --el-tag-border-color: @tag-border-color;
+    --el-tag-hover-color: @tag-close-hover-bg-color;
+  }
+  &.is-closable {
+    padding-right: var(--el-icon-size);
+    & > .el-tag__close {
+      margin-right: calc(var(--el-icon-size) / -2);
+    }
+  }
+  & > .el-tag__close {
+    padding: 1px 1px;
+    border: 1px solid @tag-close-border-color;
+    & > svg {
+      width: auto;
+      height: auto;
+    }
+    &:hover {
+      color: @tag-close-hover-text-color;
+      border-color: @tag-close-hover-border-color;
+    }
+  }
+}

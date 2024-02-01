@@ -1,40 +1,105 @@
 .light-theme() {
-  // ------------------- Main -------------------
-  --primary-color: #0036BF; // 主色调
-  --base-margin: 16px;
-  --base-text-font-size: 16px;
-  --base-text-line-height: 24px;
-  --base-article-line-height: 24px;
+  --primary-color: #1664FF;
 
-  // ------------------- TextColor -------------------
-  --base-text-color: #333;  // 主文字颜色
-  --fail-text-color: #fc4977;
-  --pass-text-color: #27cc53;
-  --header-text-color: #fff;
-  --button-text-color: #fff;
+  --global-border-radius: 4px;
+  --global-font-size: 14px;
+  --global-font-size-small: 12px;
+  --global-font-size-large: 16px;
+  --global-text-color: #333;
+  --global-tips-text-color: #333;
+  --global-disabled-text-color: #c0c4cc;
+  --global-border-color: #E6E7EB;
+  --global-divide-color: #212d3d;
 
-  // ------------------- Background -------------------
-  --loading-backgroundColor: rgba(45, 60, 81, 0.2);
-  --base-backgroundColor: #F3F4F7;
-  --content-backgroundColor:#fff;
-  --header-backgroundColor: #fff;
-  --table-backgroundColor: #fff;
-  --table-header-backgroundColor: #F3F4F7;
-  --input-backgroundColor: #fff;
-  --dialog-backgroundColor: #fff;
-  --dialog-header-backgroundColor: #fff;
-  --button-backgroundColor: #fff;
+  --body-bg-color: #F2F3F5;
+  --header-bg-color: #fff;
+  --container-bg-color: #fff;
+  --content-bg-color: #fff;
+  --foot-bg-color: #fff;
+  --active-bg-color: #e7f2ff;
+  --mask-bg-color: rgba(255, 255, 255, .1);
 
-  // ------------------- Hover / Active -------------------
-  --hover-color: #020202;
+  --overlay-bg-color: #2d3c51;
+  --overlay-border-color: #212d3d;
 
-  // ------------------- BorderColor -------------------
-  --base-border-color: #F2F3F5;
-  --disable-border-color: #F2F3F5;
-  --content-border-color: #F2F3F5;
-  --title-border-color: #fff;
-  --table-border-color: #F2F3F5;
-  --button-border-color: #0036BF;
-  --input-border-color: #E6E7EB;
-  --dialog-border-Color: #465A74;
+  --button-padding: 10px 20px;
+  --button-padding-small: 7px 14px;
+  --button-padding-large: 12px 24px;
+  --button-height: auto;
+  --button-default-bg-color: var(--header-bg-color);
+  --button-default-text-color: #333;
+  --button-default-border-color: var(--global-border-color);
+  --button-default-hover-bg-color: var(--header-bg-color);
+  --button-default-hover-text-color: var(--primary-color);
+  --button-default-hover-border-color: var(--primary-color);
+  --button-default-disabled-bg-color: rgba(242, 243, 245, .65);
+  --button-default-disabled-text-color: rgba(51, 51, 51, .65);
+  --button-default-disabled-border-color: rgba(218, 220, 224, .65);
+  --button-primary-bg-color: var(--primary-color);
+  --button-primary-text-color: #fff;
+  --button-primary-border-color: var(--primary-color);
+  --button-primary-hover-bg-color: var(--primary-color);
+  --button-primary-hover-text-color: #fff;
+  --button-primary-hover-border-color: var(--primary-color);
+  --button-primary-disabled-bg-color: var(--button-primary-disabled-bg-color);
+  --button-primary-disabled-text-color: var(--button-primary-disabled-text-color);
+  --button-primary-disabled-border-color: var(--button-primary-disabled-border-color);
+  --button-link-padding: 0 0;
+  --button-link-text-color: var(--primary-color);
+  --button-link-hover-text-color: var(--primary-color);
+  --button-link-disabled-text-color: rgba(192, 196, 204, .45);
+
+  --table-padding: 12px 10px;
+  --table-container-border-color: #F2F3F5;
+  --table-header-font-size: 14px;
+  --table-header-font-weight: 600;
+  --table-header-bg-color: #F2F3F5;
+  --table-header-text-color: var(--global-text-color);
+  --table-header-border-color: #F2F3F5;
+  --table-body-bg-color: var(--content-bg-color);
+  --table-body-text-color: var(--global-text-color);
+  --table-body-border-color: #F2F3F5;
+  --table-striped-bg-color: var(--content-bg-color);
+  --table-hover-bg-color: var(--header-bg-color);
+
+  --input-padding: 0 12px;
+  --input-height: 36px;
+  --input-height-small: 32px;
+  --input-bg-color: #fff;
+  --input-text-color: var(--global-text-color);
+  --input-border-color: var(--global-border-color);
+  --input-hover-border-color: var(--primary-color);
+  --input-placeholder-text-color: #8e9198;
+
+  --overlay-bg-color: var(--container-bg-color);
+  --overlay-text-color: var(--global-text-color);
+  --overlay-border-color: var(--global-border-color);
+  --overlay-hover-bg-color: var(--active-bg-color);
+  --overlay-hover-text-color: var(--global-text-color);
+
+  --dialog-header-padding: 0 16px;
+  --dialog-header-height: 38px;
+  --dialog-header-font-size: var(--global-font-size-large);
+  --dialog-header-text-align: left;
+  --dialog-header-bg-color: #fff;
+  --dialog-header-text-color: #333;
+  --dialog-header-border-color: #fff;
+  --dialog-body-padding: 0 0;
+  --dialog-body-bg-color: #fff;
+  --dialog-footer-border-color: #F2F3F5;
+
+  --tag-height: 24px;
+  --tag-padding: 0 10px;
+  --tag-font-size: 12px;
+  --tag-border-radius: var(--global-border-radius);
+  --tag-bg-color: #f4f4f5;
+  --tag-text-color: #909399;
+  --tag-border-color: var(--tag-bg-color);
+  --tag-close-bg-color: var(--tag-bg-color);
+  --tag-close-text-color: #909399;
+  --tag-close-border-color: var(--tag-bg-color);
+  --tag-close-hover-bg-color: #909399;
+  --tag-close-hover-text-color: #fff;
+  --tag-close-hover-border-color: #909399;
+  --tag-close-size: 12px;
 }

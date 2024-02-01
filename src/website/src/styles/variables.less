@@ -4,41 +4,109 @@
  * 替换：@$1: var(--$1);
  */
 
-// ------------------- Main -------------------
-@primary-color: var(--primary-color); // 主色调
-@margin: var(--base-margin);
-@base-text-font-size: var(--base-text-font-size);
-@base-text-line-height: var(--base-text-line-height);
-@base-article-line-height: var(--base-article-line-height);
+@global-font-size: var(--global-font-size);
+@global-font-size-small: var(--global-font-size-small);
+@global-font-size-large: var(--global-font-size-large);
+@global-border-radius: var(--global-border-radius);
 
-// ------------------- TextColor -------------------
-@base-text-color: var(--base-text-color); // Base 文字颜色
-@fail-text-color: var(--fail-text-color);
-@pass-text-color: var(--pass-text-color);
-@header-text-color: var(--header-text-color);
-@button-text-color: var(--button-text-color);
+@primary-color: var(--primary-color);
 
-// ------------------- Background -------------------
-@loading-backgroundColor: var(--loading-backgroundColor);
-@base-backgroundColor: var(--base-backgroundColor);
-@content-backgroundColor: var(--content-backgroundColor);
-@header-backgroundColor: var(--header-backgroundColor);
-@table-backgroundColor: var(--table-backgroundColor);
-@table-header-backgroundColor: var(--table-header-backgroundColor);
-@input-backgroundColor: var(--input-backgroundColor);
-@dialog-backgroundColor: var(--dialog-backgroundColor);
-@dialog-header-backgroundColor: var(--dialog-header-backgroundColor);
-@button-backgroundColor: var(--button-backgroundColor);
+@global-border-radius: var(--global-border-radius);
+@global-font-size: var(--global-font-size);
+@global-bg-color: var(--global-bg-color);
+@global-text-color: var(--global-text-color);
+@global-tips-text-color: var(--global-tips-text-color);
+@global-disabled-text-color: var(--global-disabled-text-color);
+@global-border-color: var(--global-border-color);
 
-// ------------------- Hover / Active -------------------
-@hover-color: var(--hover-color);
+@body-bg-color: var(--body-bg-color);
+@header-bg-color: var(--header-bg-color);
+@container-bg-color: var(--container-bg-color);
+@content-bg-color: var(--content-bg-color);
+@foot-bg-color: var(--foot-bg-color);
+@active-bg-color: var(--active-bg-color);
+@mask-bg-color: var(--mask-bg-color);
 
-// ------------------- BorderColor -------------------
-@base-border-color: var(--base-border-color);
-@disable-border-color: var(--disable-border-color);
-@content-border-color: var(--content-border-color);
-@title-border-color: var(--title-border-color);
-@table-border-color: var(--table-border-color);
-@button-border-color: var(--button-border-color);
+@overlay-bg-color: var(--overlay-bg-color);
+@overlay-border-color: var(--overlay-border-color);
+
+@button-padding: var(--button-padding);
+@button-padding-small: var(--button-padding-small);
+@button-padding-large: var(--button-padding-large);
+@button-height: var(--button-height);
+@button-default-bg-color: var(--button-default-bg-color);
+@button-default-text-color: var(--button-default-text-color);
+@button-default-border-color: var(--button-default-border-color);
+@button-default-hover-bg-color: var(--button-default-hover-bg-color);
+@button-default-hover-text-color: var(--button-default-hover-text-color);
+@button-default-hover-border-color: var(--button-default-hover-border-color);
+@button-default-disabled-bg-color: var(--button-default-disabled-bg-color);
+@button-default-disabled-text-color: var(--button-default-disabled-text-color);
+@button-default-disabled-border-color: var(--button-default-disabled-border-color);
+@button-primary-bg-color: var(--button-primary-bg-color);
+@button-primary-text-color: var(--button-primary-text-color);
+@button-primary-border-color: var(--button-primary-border-color);
+@button-primary-hover-bg-color: var(--button-primary-hover-bg-color);
+@button-primary-hover-text-color: var(--button-primary-hover-text-color);
+@button-primary-hover-border-color: var(--button-primary-hover-border-color);
+@button-primary-disabled-bg-color: var(--button-primary-disabled-bg-color);
+@button-primary-disabled-text-color: var(--button-primary-disabled-text-color);
+@button-primary-disabled-border-color: var(--button-primary-disabled-border-color);
+@button-link-padding: var(--button-link-padding);
+@button-link-text-color: var(--button-link-text-color);
+@button-link-hover-text-color: var(--button-link-hover-text-color);
+@button-link-disabled-text-color: var(--button-link-disabled-text-color);
+
+@table-padding: var(--table-padding);
+@table-container-border-color: var(--table-container-border-color);
+@table-header-font-size: var(--table-header-font-size);
+@table-header-font-weight: var(--table-header-font-weight);
+@table-header-bg-color: var(--table-header-bg-color);
+@table-header-text-color: var(--table-header-text-color);
+@table-header-border-color: var(--table-header-border-color);
+@table-body-bg-color: var(--table-body-bg-color);
+@table-body-text-color: var(--table-body-text-color);
+@table-body-border-color: var(--table-body-border-color);
+@table-striped-bg-color: var(--table-striped-bg-color);
+@table-hover-bg-color: var(--table-hover-bg-color);
+
+@input-padding: var(--input-padding);
+@input-height: var(--input-height);
+@input-height-small: var(--input-height-small);
+@input-bg-color: var(--input-bg-color);
+@input-text-color: var(--input-text-color);
 @input-border-color: var(--input-border-color);
-@dialog-border-Color: var(--dialog-border-Color);
+@input-hover-border-color: var(--input-hover-border-color);
+@input-placeholder-text-color: var(--input-placeholder-text-color);
+
+@overlay-bg-color: var(--overlay-bg-color);
+@overlay-text-color: var(--overlay-text-color);
+@overlay-border-color: var(--overlay-border-color);
+@overlay-hover-bg-color: var(--overlay-hover-bg-color);
+@overlay-hover-text-color: var(--overlay-hover-text-color);
+
+@dialog-header-padding: var(--dialog-header-padding);
+@dialog-header-height: var(--dialog-header-height);
+@dialog-header-font-size: var(--dialog-header-font-size);
+@dialog-header-text-align: var(--dialog-header-text-align);
+@dialog-header-bg-color: var(--dialog-header-bg-color);
+@dialog-header-text-color: var(--dialog-header-text-color);
+@dialog-header-border-color: var(--dialog-header-border-color);
+@dialog-body-padding: var(--dialog-body-padding);
+@dialog-body-bg-color: var(--dialog-body-bg-color);
+@dialog-footer-border-color: var(--dialog-footer-border-color);
+
+@tag-height: var(--tag-height);
+@tag-padding: var(--tag-padding);
+@tag-font-size: var(--tag-font-size);
+@tag-border-radius: var(--tag-border-radius);
+@tag-bg-color: var(--tag-bg-color);
+@tag-text-color: var(--tag-text-color);
+@tag-border-color: var(--tag-border-color);
+@tag-close-bg-color: var(--tag-close-bg-color);
+@tag-close-text-color: var(--tag-close-text-color);
+@tag-close-border-color: var(--tag-close-border-color);
+@tag-close-hover-bg-color: var(--tag-close-hover-bg-color);
+@tag-close-hover-text-color: var(--tag-close-hover-text-color);
+@tag-close-hover-border-color: var(--tag-close-hover-border-color);
+@tag-close-size: var(--tag-close-size);
