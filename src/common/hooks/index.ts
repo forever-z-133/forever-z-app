@@ -1,1 +1,1 @@
-export const hooks = 'hooks'
+export { default as useForwardRef } from './useForwardRef/index'
