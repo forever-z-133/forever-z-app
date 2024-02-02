@@ -6,17 +6,20 @@
     "build": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.8",
-    "@storybook/addon-interactions": "^7.6.8",
-    "@storybook/addon-links": "^7.6.8",
-    "@storybook/blocks": "^7.6.8",
-    "@storybook/test": "^7.6.8",
-    "@storybook/vue3": "^7.6.8",
-    "@storybook/vue3-vite": "^7.6.8",
+    "@storybook/addon-essentials": "^7.6.12",
+    "@storybook/addon-interactions": "^7.6.12",
+    "@storybook/addon-links": "^7.6.12",
+    "@storybook/blocks": "^7.6.12",
+    "@storybook/test": "^7.6.12",
+    "@storybook/vue3": "^7.6.12",
+    "@storybook/vue3-vite": "^7.6.12",
     "common": "workspace:common",
+    "element-plus": "^2.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.6.8",
-    "vue": "3.4.3"
+    "storybook": "^7.6.12",
+    "unplugin-auto-import": "^0.17.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vue": "3.4.15"
   }
 }

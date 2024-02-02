@@ -15,6 +15,7 @@ const meta: Meta<typeof TestButton> = {
       },
       options: ['small', 'medium', 'large'],
     },
+    // @ts-expect-error: Unreachable code error
     onClick: {},
   },
 }

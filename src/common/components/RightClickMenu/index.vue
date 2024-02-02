@@ -1,27 +1,68 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { cloneDeep, isObject } from 'lodash-es'
+
 interface Props {
-  menus: string[]
+  menus: any[] | string[]
+  valueKey?: string
+  labelKey?: string
+  clickable?: boolean
 }
+
+defineOptions({
+  name: 'RightClickMenu',
+})
 
 const props = withDefaults(defineProps<Props>(), {
   menus: () => [],
+  valueKey: '',
+  labelKey: '',
+  clickable: false, // TODO: 同时支持鼠标左右键点击，为实现
 })
 
 const emit = defineEmits<{
-  (e: 'click', menu: string): void
+  (e: 'command', item: string | any): void
 }>()
 
-function onClick(menu) {
-  emit('click', menu)
+defineSlots<{
+  default(): any
+  dropdown(): any
+  item(props: { row: any, label: string }): any
+}>()
+
+const innerMenus = computed<({ raw: any, value: any, label: string, disabled: boolean })[]>(() => {
+  return props.menus.map((item: string | any) => ({
+    raw: item,
+    value: props.valueKey ? item[props.valueKey] : item,
+    label: props.labelKey ? item[props.labelKey] : item,
+    disabled: isObject(item) ? item.disabled : false,
+  }))
+})
+
+function onCommand(item: string | any) {
+  emit('command', cloneDeep(item))
 }
 </script>
 
 <template>
-  <div>
-    <template v-for="menu in props.menus" :key="menu">
-      <div class="item" @click="onClick(menu)">
-        {{ menu }}
-      </div>
+  <el-dropdown trigger="contextmenu" v-on="$attrs">
+    <template #default>
+      <slot>
+        <span>···</span>
+      </slot>
     </template>
-  </div>
+    <template #dropdown>
+      <slot name="dropdown">
+        <el-dropdown-menu>
+          <template v-for="item in innerMenus" :key="item.value">
+            <el-dropdown-item :disabled="item.disabled" @click="onCommand(item.raw)">
+              <slot name="item" :row="item.raw" :label="item.label">
+                {{ item.label }}
+              </slot>
+            </el-dropdown-item>
+          </template>
+        </el-dropdown-menu>
+      </slot>
+    </template>
+  </el-dropdown>
 </template>
