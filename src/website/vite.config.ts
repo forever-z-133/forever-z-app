@@ -73,7 +73,7 @@ export default defineConfig(({ command, mode }) => {
         less: {
           javascriptEnabled: true,
           modifyVars: {
-            hack: 'true; @import (reference) "@/styles/variables.less";\n@import (reference) "@/styles/mixins.less";\n',
+            hack: 'true; @import (reference) "common/styles/variables.less";\n@import (reference) "common/styles/mixins.less";\n',
           },
         },
       },

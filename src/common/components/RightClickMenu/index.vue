@@ -35,7 +35,7 @@ const innerMenus = computed<({ raw: any, value: any, label: string, disabled: bo
     raw: item,
     value: props.valueKey ? item[props.valueKey] : item,
     label: props.labelKey ? item[props.labelKey] : item,
-    disabled: isObject(item) ? item.disabled : false,
+    disabled: isObject(item) as any ? item.disabled : false,
   }))
 })
 
@@ -45,7 +45,7 @@ function onCommand(item: string | any) {
 </script>
 
 <template>
-  <el-dropdown trigger="contextmenu" v-on="$attrs">
+  <el-dropdown trigger="contextmenu" v-bind="$attrs">
     <template #default>
       <slot>
         <span>···</span>

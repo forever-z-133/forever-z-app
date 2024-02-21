@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/node": "^20.10.16",
     "@vitejs/plugin-vue": "^5.0.2",
+    "common": "workspace:common",
     "cross-env": "7.0.3",
     "desktop": "workspace:desktop",
     "less": "^4.2.0",
