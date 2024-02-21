@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
+import { userEvent, within } from '@storybook/test'
 import { RightClickMenu } from 'common'
 
 const meta: Meta<typeof RightClickMenu> = {
@@ -29,6 +30,11 @@ export const Basic: StoryObj<typeof RightClickMenu> = {
   args: {
     menus: ['Action 1', 'Action 2'],
   },
+  play: async ({ canvasElement }) => {
+    const ctx = within(canvasElement)
+    const el = await ctx.findByRole('button')
+    userEvent.pointer({ keys: '[MouseRight]', target: el })
+  },
 }
 
 // 数据为 json 格式
@@ -51,9 +57,9 @@ export const DefaultSlot: StoryObj<typeof RightClickMenu> = {
   },
   render: args => ({
     components: { RightClickMenu },
-    setup: () => ({ ...args }),
+    setup: () => ({ args }),
     template: `
-      <RightClickMenu :menus="menus" @command="onCommand">
+      <RightClickMenu v-bind="args">
         右键点击我
       </RightClickMenu>
     `,
@@ -69,14 +75,9 @@ export const ItemSlot: StoryObj<typeof RightClickMenu> = {
   },
   render: args => ({
     components: { RightClickMenu },
-    setup: () => ({ ...args }),
+    setup: () => ({ args }),
     template: `
-      <RightClickMenu
-        :menus="menus"
-        :value-key="valueKey"
-        :label-key="labelKey"
-        @command="onCommand"
-      >
+      <RightClickMenu v-bind="args">
         <template #item="{ row, label }">
           <div :style="{ color: row.key === 'A' ? 'red' : '' }">
             {{ label }}

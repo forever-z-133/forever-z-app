@@ -8,6 +8,11 @@ const preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      toc: {
+        headingSelector: 'h1,h2,h3',
+      },
+    },
   },
 }
 
