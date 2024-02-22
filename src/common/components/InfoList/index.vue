@@ -39,8 +39,13 @@ const labelPositionClass = computed(() => {
 @import "../../styles/mixins.less";
 
 .info-list {
+  --info-list-children-gap: 8px;
+}
+
+.info-list {
+  .items-gap(var(--info-list-children-gap), bottom);
+
   &.label-at-top {
-    .items-gap(8px, bottom);
     & > :deep(.info-list-item) {
       display: block;
     }

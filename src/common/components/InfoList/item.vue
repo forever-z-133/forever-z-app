@@ -26,6 +26,9 @@ const props = withDefaults(defineProps<Props>(), {
 defineSlots<{
   default(props: { value: Props['value'], tooltip: Props['tooltip'] }): any
   label(props: { label: Props['label'] }): any
+  'before-label'(): any
+  'after-label'(): any
+  'after-value'(): any
 }>()
 
 // 由 InfoList 父组件来的数据
@@ -50,17 +53,26 @@ function calculateUnitNumber(str: Props['labelWidth']) {
   <div class="info-list-item">
     <div v-if="props.label || $slots.label" class="label" :style="{ width: labelWidth }">
       <slot name="label" :label="props.label">
-        <span class="">{{ props.label }}</span>
+        <span v-if="$slots['before-label']" class="before-label">
+          <slot name="before-label" />
+        </span>
+        <span class="text">{{ props.label }}</span>
+        <span v-if="$slots['after-label']" class="after-label">
+          <slot name="after-label" />
+        </span>
       </slot>
     </div>
     <div class="value" :class="{ ellipsis }">
       <slot :value="props.value" :tooltip="props.tooltip">
         <el-tooltip :disabled="!props.tooltip" :content="String(props.tooltip)" placement="top">
-          <div class="content" :title="String(props.value)">
+          <span class="text" :title="String(props.value)">
             {{ props.value }}
-          </div>
+          </span>
         </el-tooltip>
       </slot>
+      <span v-if="$slots['after-value']" class="after-value">
+        <slot name="after-value" />
+      </span>
     </div>
   </div>
 </template>
@@ -68,15 +80,30 @@ function calculateUnitNumber(str: Props['labelWidth']) {
 <style scoped lang="less">
 @import "../../styles/mixins.less";
 .info-list-item {
+  --info-list-item-label-color: inherit;
+  --info-list-item-value-color: rgba(15, 24, 41, 0.7);
+  --info-list-item-gap: 16px;
+  --info-list-item-content-gap: 4px;
+}
+
+.info-list-item {
   display: flex;
-  .items-gap(16px);
+  .items-gap(var(--info-list-item-gap), right);
 
   .label {
     flex-shrink: 0;
+    .items-gap(var(--info-list-item-content-gap), right);
+    .text {
+      color: var(--info-list-item-label-color);
+    }
   }
 
   .value {
-    color: rgba(15, 24, 41, 0.7);
+    .items-gap(var(--info-list-item-content-gap), right);
+    .text {
+      color: var(--info-list-item-value-color);
+    }
+
     &.ellipsis {
       overflow: hidden;
       & > .content {

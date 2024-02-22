@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { InfoListItem } from 'common'
-import ItemDefaultSlot from './examples/ItemDefaultSlot.vue'
+import { CopyDocument } from '@element-plus/icons-vue'
 
 const meta: Meta<typeof InfoListItem> = {
   title: 'Example/InfoListItem',
@@ -31,16 +31,22 @@ export const Basic: StoryObj<typeof InfoListItem> = {
 }
 
 // 自定义内容
-export const DefaultSlot: StoryObj<typeof InfoListItem> = {
+export const AfterLabelSlot: StoryObj<typeof InfoListItem> = {
   args: {
     label: '场景ID',
     value: '129031213',
   },
   render: args => ({
-    components: { ItemDefaultSlot },
+    components: { InfoListItem, CopyDocument },
     setup: () => ({ args }),
     template: `
-      <ItemDefaultSlot v-bind="args" />
+      <InfoListItem v-bind="args">
+        <template #after-value>
+          <button class="el-button el-button--primary is-link">
+            <span class="el-icon"><CopyDocument /></span>
+          </button>
+        </template>
+      </InfoListItem>
     `,
   }),
 }
