@@ -1,9 +1,14 @@
-import { join } from 'node:path'
-
-const thisDir = __dirname
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default {
-  build: {
-    outDir: join(thisDir, 'dist'),
-  },
+  plugins: [
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
 }

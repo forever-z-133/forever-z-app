@@ -12,13 +12,14 @@
     "build:desktop": "vite build --mode desktop && pnpm run --filter desktop build"
   },
   "dependencies": {
-    "element-plus": "^2.4.4",
-    "vue": "^3.4.3",
+    "element-plus": "^2.5.4",
+    "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
+    "@types/node": "^20.10.16",
     "@vitejs/plugin-vue": "^5.0.2",
+    "common": "workspace:common",
     "cross-env": "7.0.3",
     "desktop": "workspace:desktop",
     "less": "^4.2.0",

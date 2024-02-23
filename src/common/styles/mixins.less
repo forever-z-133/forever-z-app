@@ -22,19 +22,31 @@
 }
 
 // 等宽分栏
-.column-row(@length: 2, @gap: 0px, @child: ~'.item') {
+.column-row(@length: 2, @child: ~'.item', @column-gap: 0px, @row-gap: 0px) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1 * @gap;
-  margin-bottom: -1 * @gap;
+  margin-right: calc(-1 * @column-gap);
+  margin-bottom: calc(-1 * @row-gap);
 
   & > @{child} {
     flex-grow: 1;
     overflow: hidden;
-    margin-right: @gap;
-    margin-bottom: @gap;
+    margin-right: @column-gap;
+    margin-bottom: @row-gap;
     flex-basis: calc(100% / @length);
-    max-width: calc(100% / @length - @gap);
+    max-width: calc(100% / @length - @column-gap);
+  }
+}
+
+// flex 布局且 @selector 元素体积扩张
+.flex-grow(@selector: ~'.grow') {
+  @{selector} {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  :not(@{selector}) {
+    flex-shrink: 0;
   }
 }
 
