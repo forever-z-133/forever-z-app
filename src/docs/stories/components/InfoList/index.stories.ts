@@ -7,6 +7,9 @@ const meta: Meta<typeof InfoList> = {
   argTypes: {
     labelWidth: { description: '介绍词宽度', control: 'text' },
     labelPosition: { description: '介绍词所在位置', options: ['left', 'right', 'top'] },
+    connection: { description: '介绍词与内容之间的文本', control: 'text' },
+    column: { description: '多栏样式', control: { type: 'number', min: 0, step: 1 } },
+    columnGap: { description: '多栏之间的空隙', control: 'text' },
   },
 }
 export default meta
@@ -41,6 +44,23 @@ export const Basic: StoryObj<typeof InfoList> = {
   args: {
     labelWidth: 'auto',
     labelPosition: 'left',
+    connection: ':',
+  },
+  ...InfoListExampleTemplate,
+}
+
+// 常规使用
+export const NoConnection: StoryObj<typeof InfoList> = {
+  args: {
+    connection: '',
+  },
+  ...InfoListExampleTemplate,
+}
+
+// 介绍词右对齐
+export const LabelWidth: StoryObj<typeof InfoList> = {
+  args: {
+    labelWidth: '5em',
   },
   ...InfoListExampleTemplate,
 }
@@ -48,7 +68,7 @@ export const Basic: StoryObj<typeof InfoList> = {
 // 介绍词右对齐
 export const AlignRight: StoryObj<typeof InfoList> = {
   args: {
-    labelWidth: '4em',
+    labelWidth: '5em',
     labelPosition: 'right',
   },
   ...InfoListExampleTemplate,
@@ -57,8 +77,17 @@ export const AlignRight: StoryObj<typeof InfoList> = {
 // 介绍词居顶
 export const AlignTop: StoryObj<typeof InfoList> = {
   args: {
-    labelWidth: 'auto',
     labelPosition: 'top',
+  },
+  ...InfoListExampleTemplate,
+}
+
+// 多栏样式
+export const MultiColumn: StoryObj<typeof InfoList> = {
+  args: {
+    labelWidth: '5em',
+    column: 3,
+    columnGap: '20px',
   },
   ...InfoListExampleTemplate,
 }

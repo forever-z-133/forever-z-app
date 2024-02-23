@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { isNumberString } from '../../utils/index'
+import { calculateUnitNumber } from '../../utils/index'
 import type { INFO_LIST_PROVIDE } from './index.vue'
 
 interface Props {
+  // 介绍词
   label?: string
+  // 介绍词宽度，会覆盖 InfoList 父组件的值
   labelWidth?: 'auto' | string | number
+  // 介绍词所在位置，会覆盖 InfoList 父组件的值
+  labelPosition?: 'left' | 'right' | 'top'
+  // 介绍词与内容之间的文本
+  connection?: string
+  // 内容
   value?: string | number
+  // 鼠标在内容上悬停时显示的内容
   tooltip?: string | number
+  // 内容超长时是否显示省略号
   ellipsis?: boolean
 }
 
@@ -17,7 +26,9 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   label: '',
-  labelWidth: 'auto',
+  labelWidth: undefined,
+  labelPosition: undefined,
+  connection: undefined,
   value: '',
   tooltip: '',
   ellipsis: true,
@@ -41,22 +52,29 @@ const labelWidth = computed(() => {
   return calculateUnitNumber(props.labelWidth)
 })
 
-// 比如 10 转为 10px，格式化 css 数字单位
-function calculateUnitNumber(str: Props['labelWidth']) {
-  if (!str || str === 'auto') return ''
-  if (isNumberString(str)) return `${str}px`
-  return str
-}
+// 介绍词位置样式
+const labelPositionClass = computed(() => {
+  if (!props.labelPosition) return '' // 本组件没设置则使用父级
+  return props.labelPosition ? `label-at-${props.labelPosition}` : ''
+})
+
+// 介绍词与内容之间的文本
+const connectionTxt = computed(() => {
+  return typeof props.connection === 'string' ? props.connection : typeof ctx.connection === 'string' ? ctx.connection : ''
+})
 </script>
 
 <template>
-  <div class="info-list-item">
+  <div class="info-list-item" :class="labelPositionClass">
     <div v-if="props.label || $slots.label" class="label" :style="{ width: labelWidth }">
       <slot name="label" :label="props.label">
         <span v-if="$slots['before-label']" class="before-label">
           <slot name="before-label" />
         </span>
-        <span class="text">{{ props.label }}</span>
+        <span class="text">
+          <span>{{ props.label }}</span>
+          <span v-if="!!connectionTxt" class="connection">{{ connectionTxt }}</span>
+        </span>
         <span v-if="$slots['after-label']" class="after-label">
           <slot name="after-label" />
         </span>
@@ -65,14 +83,14 @@ function calculateUnitNumber(str: Props['labelWidth']) {
     <div class="value" :class="{ ellipsis }">
       <slot :value="props.value" :tooltip="props.tooltip">
         <el-tooltip :disabled="!props.tooltip" :content="String(props.tooltip)" placement="top">
-          <span class="text" :title="String(props.value)">
+          <div class="text" :title="String(props.value)">
             {{ props.value }}
-          </span>
+          </div>
         </el-tooltip>
+        <span v-if="$slots['after-value']" class="after-value">
+          <slot name="after-value" />
+        </span>
       </slot>
-      <span v-if="$slots['after-value']" class="after-value">
-        <slot name="after-value" />
-      </span>
     </div>
   </div>
 </template>
@@ -88,28 +106,50 @@ function calculateUnitNumber(str: Props['labelWidth']) {
 
 .info-list-item {
   display: flex;
-  .items-gap(var(--info-list-item-gap), right);
+  align-items: baseline;
+  gap: var(--info-list-item-gap);
+
+  &.label-at-top {
+    display: block;
+  }
+
+  &.label-at-right {
+    .label {
+      justify-content: flex-end;
+    }
+  }
 
   .label {
     flex-shrink: 0;
-    .items-gap(var(--info-list-item-content-gap), right);
+    display: flex;
+    align-items: center;
+    gap: var(--info-list-item-content-gap);
     .text {
       color: var(--info-list-item-label-color);
     }
   }
 
   .value {
-    .items-gap(var(--info-list-item-content-gap), right);
+    display: flex;
+    align-items: center;
+    gap: var(--info-list-item-content-gap);
     .text {
       color: var(--info-list-item-value-color);
     }
 
     &.ellipsis {
       overflow: hidden;
-      & > .content {
+      & > .text {
         .text-overflow();
       }
     }
+  }
+
+  .before-label,
+  .after-label,
+  .after-value {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
