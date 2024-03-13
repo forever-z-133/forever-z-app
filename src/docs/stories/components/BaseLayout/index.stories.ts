@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
+import { computed, ref } from 'vue'
+import { ElCheckbox, ElCheckboxGroup } from 'element-plus'
 import { BaseLayout } from 'common'
 import Header from './mock/Header.vue'
 import Content from './mock/Content.vue'
@@ -11,6 +13,9 @@ const meta: Meta<typeof BaseLayout> = {
   component: BaseLayout,
   argTypes: {
     headerContainLeft: { description: '页首包含左侧' },
+    headerContainRight: { description: '页首是否包含右侧' },
+    footerContainLeft: { description: '页末是否包含左侧' },
+    footerContainRight: { description: '页末是否包含右侧' },
   },
 }
 export default meta
@@ -20,15 +25,27 @@ function BaseLayoutExampleTemplate(comps: string[]): StoryObj<typeof BaseLayout>
   const components = { header: Header, default: Content, left: Left, right: Right, footer: Footer }
   return {
     render: args => ({
-      components: { BaseLayout, Header, Content, Left, Right, Footer },
-      setup: () => ({ args, components, comps }),
+      components: { ElCheckboxGroup, ElCheckbox, BaseLayout, Header, Content, Left, Right, Footer },
+      setup: () => {
+        const options = ['header', 'left', 'right', 'footer']
+        const chosen = ref(comps)
+        const slots = computed(() => [...chosen.value, 'default'])
+        return { args, components, slots, options, chosen }
+      },
       template: `
-      <BaseLayout v-bind="args">
-        <template v-for="name in comps" :key="name">
-          <component :is="components[name]" />
-        </template>
-      </BaseLayout>
-    `,
+        <div>
+          <ElCheckboxGroup v-model="chosen" multiple>
+            <template v-for="op in options" :key="op">
+              <ElCheckbox :value="op" :label="op" />
+            </template>
+          </ElCheckboxGroup>
+          <BaseLayout v-bind="args">
+            <template v-for="name in slots" :key="name" #[name]>
+              <component :is="components[name]" />
+            </template>
+          </BaseLayout>
+        </div>
+      `,
     }),
   }
 }
@@ -38,6 +55,8 @@ export const Basic: StoryObj<typeof BaseLayout> = {
   args: {
     headerContainLeft: true,
     headerContainRight: true,
+    footerContainLeft: false,
+    footerContainRight: true,
   },
-  ...BaseLayoutExampleTemplate(['header', 'default', 'left', 'right', 'footer']),
+  ...BaseLayoutExampleTemplate(['header', 'left', 'right', 'footer']),
 }

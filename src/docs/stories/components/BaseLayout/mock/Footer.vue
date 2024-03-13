@@ -9,6 +9,7 @@
 
 <style scoped lang="less">
 .mock-footer {
+  height: 100%;
   background-color: lightblue;
 }
 </style>

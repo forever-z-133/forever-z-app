@@ -9,6 +9,7 @@
 
 <style scoped lang="less">
 .mock-left {
+  height: 100%;
   background-color: lightgreen;
 }
 </style>

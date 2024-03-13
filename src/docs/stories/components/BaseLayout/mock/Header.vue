@@ -9,6 +9,7 @@
 
 <style scoped lang="less">
 .mock-header {
+  height: 100%;
   background-color: pink;
 }
 </style>

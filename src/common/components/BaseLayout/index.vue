@@ -6,10 +6,16 @@ interface Props {
   headerContainLeft?: boolean
   // 页首是否包含右侧
   headerContainRight?: boolean
+  // 页末是否包含左侧
+  footerContainLeft?: boolean
+  // 页末是否包含右侧
+  footerContainRight?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   headerContainLeft: true,
-  headerContainRight: false,
+  headerContainRight: true,
+  footerContainLeft: false,
+  footerContainRight: true,
 })
 defineSlots<{
   default(): any
@@ -18,14 +24,23 @@ defineSlots<{
   left(): any
 }>()
 
-const layoutClass = computed(() => ({
-  'header-contain-left': props.headerContainLeft,
-  'header-contain-right': props.headerContainRight,
-}))
+const layoutStyle = computed(() => {
+  const headerLeft = props.headerContainLeft ? 'header' : 'left'
+  const headerRight = props.headerContainRight ? 'header' : 'right'
+  const footerLeft = props.footerContainLeft ? 'footer' : 'left'
+  const footerRight = props.footerContainRight ? 'footer' : 'right'
+  return {
+    gridTemplateAreas: `
+      "${headerLeft} header ${headerRight}"
+      "left body right"
+      "${footerLeft} footer ${footerRight}"
+    `,
+  }
+})
 </script>
 
 <template>
-  <div class="base-layout" :class="layoutClass">
+  <div class="base-layout" :style="layoutStyle">
     <div v-if="$slots.header" class="base-layout-header">
       <slot name="header" />
     </div>
@@ -53,8 +68,28 @@ const layoutClass = computed(() => ({
 }
 .base-layout {
   display: grid;
-  grid-template-columns: var(--base-layout-left-width) 1fr var(--base-layout-right-width);
-  grid-template-rows: var(--base-layout-header-height) 1fr var(--base-layout-footer-height);
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "left head right" "left body right" "left foot right";
   height: 100%;
+  .base-layout-header {
+    grid-area: header;
+    height: var(--base-layout-header-height);
+  }
+  .base-layout-left {
+    grid-area: left;
+    width: var(--base-layout-left-width);
+  }
+  .base-layout-container {
+    grid-area: body;
+  }
+  .base-layout-right {
+    grid-area: right;
+    width: var(--base-layout-right-width);
+  }
+  .base-layout-footer {
+    grid-area: footer;
+    height: var(--base-layout-footer-height);
+  }
 }
 </style>
