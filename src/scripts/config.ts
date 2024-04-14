@@ -4,9 +4,11 @@
 export const codeDirs = [
   // 'E:/test',
   'F:/坏',
+  'E:/下载2',
   'E:/下载3',
   'F:/无码',
   'F:/有码',
+  'F:/麻豆',
   'F:/写真',
 ]
 
@@ -23,3 +25,8 @@ export const badCodeDirs = [
 export const ignorePaths = [
   'node_modules',
 ]
+
+/**
+ * 桌面路径
+ */
+export const desktopPath = 'C:/Users/Admin/Desktop'

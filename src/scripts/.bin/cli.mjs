@@ -29,6 +29,12 @@ program
   .action(fileDir => run('rename', fileDir))
 
 program
+  .command('remove')
+  .description('删除觉得不好看的番号')
+  .argument('[code]', '需删除的番号')
+  .action(code => run('remove', code))
+
+program
   .command('test')
   .description('测试脚本')
   .argument('[args...]', '测试脚本的入参')
