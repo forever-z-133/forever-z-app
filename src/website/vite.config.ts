@@ -1,39 +1,13 @@
 import { join } from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import electron from 'vite-plugin-electron/simple'
 import type { APP_PROJECT } from 'types/website.d.ts'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { startup as electronStartup } from 'desktop/src/utils/electronStartup'
+import getViteElectronPlugin from 'desktop/vite-plugin'
 
 const thisDir = __dirname
-
-function getElectronPlugin(env: NodeJS.ProcessEnv) {
-  if (env.APP_PROJECT !== 'desktop') return
-  const commonConfig = {
-    vite: {
-      build: {
-        outDir: '../desktop/dist',
-      },
-    },
-    onstart(ctx) {
-      ctx.startup = electronStartup.bind(ctx)
-      ctx.startup(['../desktop', '--no-sandbox'], { env })
-    },
-  }
-  return electron({
-    main: {
-      entry: '../desktop/main.ts',
-      ...commonConfig,
-    },
-    preload: {
-      input: '../desktop/preload.ts',
-      ...commonConfig,
-    },
-  })
-}
 
 export default defineConfig(({ command, mode }) => {
   const envConfig = loadEnv(mode, join(thisDir, '.'))
@@ -54,7 +28,7 @@ export default defineConfig(({ command, mode }) => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-      getElectronPlugin(env),
+      env.APP_PROJECT === 'desktop' ? getViteElectronPlugin(env) : undefined,
     ],
     build: {
       sourcemap: true,
