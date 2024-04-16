@@ -5,7 +5,7 @@ import type { APP_PROJECT } from 'types/website.d.ts'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import getViteElectronPlugin from 'desktop/vite-plugin'
+import getViteElectronPlugin from 'desktop/vite-plugin.mjs'
 
 const thisDir = __dirname
 

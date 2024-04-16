@@ -1,7 +1,8 @@
 import { join } from 'node:path'
 import { BrowserView, BrowserWindow } from 'electron'
+import { desktopRootDir } from '../constants/paths'
 
-const rootPath = join(__dirname, '.')
+const rootPath = desktopRootDir
 const isDev = process.env.NODE_ENV === 'development'
 
 export async function createMainBrowser() {
@@ -11,7 +12,7 @@ export async function createMainBrowser() {
     // transparent: true,
     title: '',
     webPreferences: {
-      preload: join(rootPath, './preload.js'),
+      preload: join(rootPath, './preload.mjs'),
     },
   })
 

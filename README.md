@@ -35,7 +35,8 @@ forZ check
 若 `pnpm i` 时报 `node_modules/electron postinstall$ node install.js` 相关的错误，请运行以下命令：
 
 ```shell
-pnpm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
+pnpm config set electron_mirror "https://registry.npmmirror.com/-/binary/electron/"
+pnpm config set electron_builder_binaries_mirror "https://mirrors.huaweicloud.com/electron-builder-binaries/"
 ```
 
 ## todo list
@@ -52,7 +53,7 @@ pnpm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
   - [x] 番号名称规范检查
   - [ ] 番号查找
   - [ ] 番号链接提取
-  - [ ] 番号删除并缓存进已下载
+  - [x] 番号删除并缓存进已下载
   - [ ] 影片合并
   - [ ] 删除空文件夹
   - [ ] 删除指定格式的所有文件

@@ -1,9 +1,10 @@
-const { join } = require('node:path')
-const { default: electron } = require('vite-plugin-electron/simple')
-// const { viteStaticCopy } = require('vite-plugin-static-copy')
-const { startup: electronStartup } = require('./src/utils/electronStartup')
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import electron from 'vite-plugin-electron/simple'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { startup as electronStartup } from './src/utils/electronStartup.mjs'
 
-const rootPath = join(__dirname, '.')
+const rootPath = dirname(fileURLToPath(import.meta.url))
 
 function getViteElectronPlugin(env) {
   const commonConfig = {
@@ -12,7 +13,7 @@ function getViteElectronPlugin(env) {
         outDir: join(rootPath, './dist'),
       },
       plugins: [
-        // TODO: vite-plugin-static-copy 不支持 js 模式
+        // TODO: vite-plugin-static-copy 开发阶段不支持拷贝文件
         // viteStaticCopy({
         //   targets: [
         //     {
@@ -25,7 +26,7 @@ function getViteElectronPlugin(env) {
     },
     onstart(ctx) {
       ctx.startup = electronStartup.bind(ctx)
-      ctx.startup(['./', '--no-sandbox'], { env, cwd: rootPath })
+      ctx.startup(['.', '--no-sandbox'], { env, cwd: rootPath })
     },
   }
   return electron({
@@ -39,4 +40,4 @@ function getViteElectronPlugin(env) {
     },
   })
 }
-module.exports = getViteElectronPlugin
+export default getViteElectronPlugin

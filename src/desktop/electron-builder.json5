@@ -7,7 +7,7 @@
   "asar": false,
   "productName": "forever-z",
   "directories": {
-    "output": "release/${version}"
+    "output": "release"
   },
   "files": [
     "dist",
@@ -23,9 +23,7 @@
     "target": [
       {
         "target": "nsis",
-        "arch": [
-          "x64"
-        ]
+        "arch": ["x64"]
       }
     ],
     "artifactName": "${productName}-Windows-${version}-Setup.${ext}"

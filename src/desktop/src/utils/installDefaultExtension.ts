@@ -1,11 +1,15 @@
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import installExtension from 'electron-devtools-installer'
 
 /**
  * 安装默认的 chrome 插件
  * 比如 vuejs devtool
  */
 export default function installDefaultExtension() {
-  return installExtension(VUEJS_DEVTOOLS)
+  return installExtension({
+    id: 'nhdogjmejiglipccpnnnanhbledajbpd',
+    // id: 'fjjopahebfkmlmkekebhacaklbhiefbn',
+    electron: '>=1.2.1',
+  })
     .then((name) => {
       console.log(`add extension: ${name}`)
     })
