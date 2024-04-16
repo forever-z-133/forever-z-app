@@ -21,7 +21,7 @@ export default meta
 // 常规使用
 export const Basic: StoryObj<typeof EditItem> = {
   args: {
-    modelValue: ['A'],
+    modelValue: 'A',
     autoClose: true,
     controlType: 'input',
     controlAttrs: undefined,
@@ -34,10 +34,10 @@ export const Basic: StoryObj<typeof EditItem> = {
   }),
 }
 
-// 常规使用
+// 异步确认
 export const WithAjax: StoryObj<typeof EditItem> = {
   args: {
-    modelValue: '某某某',
+    modelValue: 'A',
     autoClose: false,
   },
   render: args => ({

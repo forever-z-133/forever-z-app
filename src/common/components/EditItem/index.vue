@@ -24,8 +24,8 @@ const emit = defineEmits<{
 }>()
 defineSlots<{
   default(props: { value: Props['modelValue'], label: string }): any
-  control(): any
-  control(): any
+  control(props: { value: Props['modelValue'], label: string }): any
+  buttons(props: { editing: boolean }): any
 }>()
 defineExpose({
   start,
@@ -39,8 +39,9 @@ watch(() => props.modelValue, value => form.value = value)
 const shownValue = computed(() => {
   const direct = ['input', 'input-number', 'textarea'].includes(props.controlType)
   if (direct) return form.value
-  const match = props.controlOptions.find(e => e.value)
-  return match ? match.label : ''
+  const value = Array.isArray(form.value) ? form.value : [form.value]
+  const match = props.controlOptions.filter(e => value.includes(e.value))
+  return match ? match.map(e => e.label).join(',') : ''
 })
 
 // 开始编辑
@@ -83,7 +84,7 @@ function handleConfirm() {
         </slot>
       </template>
       <template v-else>
-        <slot name="control">
+        <slot name="control" :value="props.modelValue" :label="shownValue">
           <div class="control">
             <template v-if="props.controlType === 'input'">
               <el-input v-model="form" v-bind="props.controlAttrs" />
@@ -124,19 +125,21 @@ function handleConfirm() {
       </template>
     </div>
     <div class="buttons">
-      <template v-if="!editing">
-        <el-button link class="btn-edit" @click="handleStartEdit">
-          <i class="el-icon"><EditPen /></i>
-        </el-button>
-      </template>
-      <template v-else>
-        <el-button link class="btn-cancel" @click="handleCloseEdit">
-          取消
-        </el-button>
-        <el-button link class="btn-submit" @click="handleConfirm">
-          确认
-        </el-button>
-      </template>
+      <slot name="buttons" :editing="editing">
+        <template v-if="!editing">
+          <el-button link class="btn-edit" @click="handleStartEdit">
+            <i class="el-icon"><EditPen /></i>
+          </el-button>
+        </template>
+        <template v-else>
+          <el-button link class="btn-cancel" @click="handleCloseEdit">
+            取消
+          </el-button>
+          <el-button link class="btn-submit" @click="handleConfirm">
+            确认
+          </el-button>
+        </template>
+      </slot>
     </div>
   </div>
 </template>

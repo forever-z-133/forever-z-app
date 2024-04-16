@@ -12,7 +12,7 @@
     "build:desktop": "vite build --mode desktop && pnpm run --filter desktop build"
   },
   "dependencies": {
-    "element-plus": "^2.5.4",
+    "element-plus": "^2.7.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },

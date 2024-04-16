@@ -27,8 +27,8 @@ importers:
         specifier: 2.3.1
         version: 2.3.1(vue@3.4.15)
       element-plus:
-        specifier: ^2.5.4
-        version: 2.5.4(vue@3.4.15)
+        specifier: ^2.7.0
+        version: 2.7.0(vue@3.4.15)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -84,8 +84,8 @@ importers:
         specifier: workspace:common
         version: link:../common
       element-plus:
-        specifier: ^2.5.4
-        version: 2.5.4(vue@3.4.15)
+        specifier: ^2.7.0
+        version: 2.7.0(vue@3.4.15)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -149,8 +149,8 @@ importers:
   src/website:
     dependencies:
       element-plus:
-        specifier: ^2.5.4
-        version: 2.5.4(vue@3.4.15)
+        specifier: ^2.7.0
+        version: 2.7.0(vue@3.4.15)
       vue:
         specifier: ^3.4.15
         version: 3.4.15(typescript@5.3.3)
@@ -2155,12 +2155,12 @@ packages:
     dev: true
 
   /@floating-ui/core@1.5.3:
-    resolution: {integrity: sha512-O0WKDOo0yhJuugCx6trZQj5jVJ9yR0ystG2JaNAemYUWce+pmM6WUEFIibnWyEJKdrDxhm75NoSRME35FNaM/Q==, tarball: https://registry.npmmirror.com/@floating-ui/core/-/core-1.5.3.tgz}
+    resolution: {integrity: sha512-O0WKDOo0yhJuugCx6trZQj5jVJ9yR0ystG2JaNAemYUWce+pmM6WUEFIibnWyEJKdrDxhm75NoSRME35FNaM/Q==}
     dependencies:
       '@floating-ui/utils': 0.2.1
 
   /@floating-ui/dom@1.5.4:
-    resolution: {integrity: sha512-jByEsHIY+eEdCjnTVu+E3ephzTOzkQ8hgUfGwos+bg7NlH33Zc5uO+QHz1mrQUOgIKKDD1RtS201P9NvAfq3XQ==, tarball: https://registry.npmmirror.com/@floating-ui/dom/-/dom-1.5.4.tgz}
+    resolution: {integrity: sha512-jByEsHIY+eEdCjnTVu+E3ephzTOzkQ8hgUfGwos+bg7NlH33Zc5uO+QHz1mrQUOgIKKDD1RtS201P9NvAfq3XQ==}
     dependencies:
       '@floating-ui/core': 1.5.3
       '@floating-ui/utils': 0.2.1
@@ -2177,7 +2177,7 @@ packages:
     dev: true
 
   /@floating-ui/utils@0.2.1:
-    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==, tarball: https://registry.npmmirror.com/@floating-ui/utils/-/utils-0.2.1.tgz}
+    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -6095,8 +6095,8 @@ packages:
       - supports-color
     dev: true
 
-  /element-plus@2.5.4(vue@3.4.15):
-    resolution: {integrity: sha512-3z2BQ53B93wypOLFq+vmT2XibTGRm3WODVPdAGymqTVGRIeUfFh17ysymn81ZvEVs4b8Dq6Fxr3I1B/9NUwZ0A==}
+  /element-plus@2.7.0(vue@3.4.15):
+    resolution: {integrity: sha512-WAiaFLavuWFxof9qwkC27jvkh9nRcNnB506g1vvJSiVaVqjCBWUFCIyJKeN11M1qcv2cS5VV5PfSLjTIkrw87A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
