@@ -1,3 +1,4 @@
+import { normalize } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getDeepFiles } from '../findDeep'
 
@@ -19,10 +20,10 @@ describe('utils/findDeep.ts', () => {
       const original: any = await importOriginal()
       return {
         ...original,
-        statSync: vi.fn(uri => ({ isDirectory: () => uri === 'test\\a' || uri === 'test\\d' })),
-        readdirSync: vi.fn(uri => ({ 'test': ['a', 'c', 'd'], 'test\\a': ['b'], 'test\\d': [] })[uri]),
+        statSync: vi.fn(uri => ({ isDirectory: () => uri === normalize('test/a') || uri === normalize('test/d') })),
+        readdirSync: vi.fn(uri => ({ test: ['a', 'c', 'd'], [normalize('test/a')]: ['b'], [normalize('test/d')]: [] })[uri]),
       }
     })
-    expect(getDeepFiles('test')).toMatchObject(['test\\a\\b', 'test\\c'])
+    expect(getDeepFiles('test')).toMatchObject([normalize('test/a/b'), normalize('test/c')])
   })
 })
