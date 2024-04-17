@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Dashboard',
         component: () => import('@/pages/Dashboard.vue'),
       },
+      {
+        path: '/map-editor',
+        name: 'MapEditor',
+        component: () => import('@/pages/MapEditor.vue'),
+      },
     ],
   },
 ]

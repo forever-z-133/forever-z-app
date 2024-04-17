@@ -25,7 +25,8 @@ declare global {
   module '*.obj'
 
   interface Window {
-    download(data: any, fileName: string): void
+    download: (data: any, fileName: string) => void
+    electron: any
   }
 
   namespace NodeJS {
