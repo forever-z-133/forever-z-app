@@ -1,6 +1,8 @@
 import { BrowserWindow, app } from 'electron'
 import installDefaultExtension from './src/utils/installDefaultExtension'
-import { createMainBrowser } from './src/browsers/main'
+import { createMainBrowser } from './src/browsers/MainEditor'
+import { createMapEditorBrowser } from './src/browsers/MapEditor'
+import { initAppListener } from './src/main/ipc-main'
 
 // 去掉 Electron Security Warning 相关警告
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
@@ -18,9 +20,14 @@ function initChrome() {
 
 app.whenReady().then(() => {
   initChrome()
+  initAppListener()
   createMainBrowser()
+  createMapEditorBrowser()
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createMainBrowser()
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createMainBrowser()
+      createMapEditorBrowser()
+    }
   })
 })
 // MAC 点叉退出，WIN 完全退出

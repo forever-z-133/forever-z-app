@@ -5,7 +5,7 @@ import { desktopRootDir } from '../constants/paths'
 const rootPath = desktopRootDir
 const isDev = process.env.NODE_ENV === 'development'
 
-export async function createMainBrowser() {
+export async function createMapEditorBrowser() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -18,7 +18,7 @@ export async function createMainBrowser() {
 
   console.log('create main browser')
   if (process.env.VITE_DEV_SERVER_URL) {
-    win.loadURL(`${process.env.VITE_DEV_SERVER_URL}/map-editor`)
+    win.loadURL(`${process.env.VITE_DEV_SERVER_URL}map-editor`)
   } else {
     win.loadFile('../website/dist/index.html')
   }
