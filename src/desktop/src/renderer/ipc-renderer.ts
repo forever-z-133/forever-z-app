@@ -22,6 +22,14 @@ export function offMessageFromWeb(eventName: string) {
   callbackMap.delete(eventName)
 }
 
+export function onMessageFromApp(eventName: string, callback: Function) {
+  callbackMap.set(eventName, callback)
+}
+
+export function offMessageFromApp(eventName: string) {
+  callbackMap.delete(eventName)
+}
+
 export function sendToOtherWeb(eventName: string, ...args: any[]) {
   return ipcRenderer.invoke('cross', { eventName, callback: true, globally: true }, ...args)
 }

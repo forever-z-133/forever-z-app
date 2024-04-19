@@ -2,7 +2,9 @@ import { contextBridge } from 'electron'
 import {
   getFromApp,
   initRendererListener,
+  offMessageFromApp,
   offMessageFromWeb,
+  onMessageFromApp,
   onMessageFromWeb,
   sendToApp,
   sendToOtherWeb,
@@ -18,5 +20,7 @@ const apis = {
   sendToOtherWeb,
   onMessageFromWeb,
   offMessageFromWeb,
+  onMessageFromApp,
+  offMessageFromApp,
 }
 contextBridge.exposeInMainWorld('electron', apis)

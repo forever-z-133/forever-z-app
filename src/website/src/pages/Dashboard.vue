@@ -7,13 +7,16 @@ const theme = ref<Theme>(initialTheme)
 const version = ref<string>('')
 const msg = ref<string>('')
 const logs = ref<string[]>([])
+const logs2 = ref<string[]>([])
 
 onMounted(() => {
   changeTheme(theme.value)
   window.electron.onMessageFromWeb('map-message', res => logs.value.push(res))
+  window.electron.onMessageFromApp('timer', res => logs2.value.push(res))
 })
 onUnmounted(() => {
   window.electron.offMessageFromWeb('map-message')
+  window.electron.offMessageFromApp('timer')
 })
 
 function toggleTheme() {
@@ -47,6 +50,10 @@ async function handleSendToOtherWeb() {
     发给其他页面
   </el-button>
   <template v-for="(item, index) in logs" :key="index">
+    <p>{{ item }}</p>
+  </template>
+  <hr />
+  <template v-for="(item, index) in logs2" :key="index">
     <p>{{ item }}</p>
   </template>
 </template>

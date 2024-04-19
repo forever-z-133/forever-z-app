@@ -44,9 +44,10 @@ pnpm config set electron_builder_binaries_mirror "https://mirrors.huaweicloud.co
 - [ ] 桌面端版本与更新问题
 - [ ] 桌面端打包
 - [ ] 桌面端与网页端互通
-  - [ ] IPC 通讯
+  - [x] IPC 通讯
   - [ ] stdout 问题
-  - [ ] 多窗口问题
+  - [x] 多窗口问题
+  - [ ] 设计API
 - [x] 脚本全局调用
 - [ ] 脚本实现
   - [x] 番号名称规范化

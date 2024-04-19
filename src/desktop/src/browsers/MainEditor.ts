@@ -1,6 +1,7 @@
 import { join } from 'node:path'
 import { BrowserWindow } from 'electron'
 import { desktopRootDir } from '../constants/paths'
+import { sendToAllWeb } from '../main/ipc-main'
 
 const rootPath = desktopRootDir
 const isDev = process.env.NODE_ENV === 'development'
@@ -22,6 +23,10 @@ export async function createMainBrowser() {
   } else {
     win.loadFile('../website/dist/index.html')
   }
+
+  setInterval(() => {
+    sendToAllWeb('timer', Date.now())
+  }, 2000)
 
   return win
 }
