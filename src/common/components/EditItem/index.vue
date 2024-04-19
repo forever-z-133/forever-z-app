@@ -23,9 +23,9 @@ const emit = defineEmits<{
   (e: 'confirm', value: Props['modelValue'], close: VoidFunction): void
 }>()
 defineSlots<{
-  default(props: { value: Props['modelValue'], label: string }): any
-  control(props: { value: Props['modelValue'], label: string }): any
-  buttons(props: { editing: boolean }): any
+  default: (props: { value: Props['modelValue'], label: string }) => any
+  control: (props: { value: Props['modelValue'], label: string }) => any
+  buttons: (props: { editing: boolean }) => any
 }>()
 defineExpose({
   start,

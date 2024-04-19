@@ -54,9 +54,9 @@ const emit = defineEmits<{
 }>()
 
 defineSlots<{
-  default(): any
-  option(props: { row: any, value: any, label: string }): any
-  after(): any
+  default: () => any
+  option: (props: { row: any, value: any, label: string }) => any
+  after: () => any
   // ... 以及其他 el-select 支持的插槽
 }>()
 

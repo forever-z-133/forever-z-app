@@ -35,11 +35,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 defineSlots<{
-  default(props: { value: Props['value'], tooltip: Props['tooltip'] }): any
-  label(props: { label: Props['label'] }): any
-  'before-label'(): any
-  'after-label'(): any
-  'after-value'(): any
+  'default': (props: { value: Props['value'], tooltip: Props['tooltip'] }) => any
+  'label': (props: { label: Props['label'] }) => any
+  'before-label': () => any
+  'after-label': () => any
+  'after-value': () => any
 }>()
 
 // 由 InfoList 父组件来的数据

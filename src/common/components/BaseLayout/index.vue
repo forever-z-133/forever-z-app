@@ -18,10 +18,10 @@ const props = withDefaults(defineProps<Props>(), {
   footerContainRight: true,
 })
 defineSlots<{
-  default(): any
-  header(): any
-  footer(): any
-  left(): any
+  default: () => any
+  header: () => any
+  footer: () => any
+  left: () => any
 }>()
 
 const layoutStyle = computed(() => {

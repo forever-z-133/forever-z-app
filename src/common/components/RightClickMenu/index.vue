@@ -25,9 +25,9 @@ const emit = defineEmits<{
 }>()
 
 defineSlots<{
-  default(): any
-  dropdown(): any
-  item(props: { row: any, label: string }): any
+  default: () => any
+  dropdown: () => any
+  item: (props: { row: any, label: string }) => any
 }>()
 
 const innerMenus = computed<({ raw: any, value: any, label: string, disabled: boolean })[]>(() => {

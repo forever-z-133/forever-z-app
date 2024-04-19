@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 defineSlots<{
-  default(): any
+  default: () => any
 }>()
 
 // 传递数据给 InfoListItem 子组件用
