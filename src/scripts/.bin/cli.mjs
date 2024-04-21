@@ -35,6 +35,12 @@ program
   .action(code => run('remove', code))
 
 program
+  .command('exist')
+  .description('查找番号是否存在')
+  .argument('[code]', '需查找的番号')
+  .action(code => run('exist', code))
+
+program
   .command('test')
   .description('测试脚本')
   .argument('[args...]', '测试脚本的入参')
