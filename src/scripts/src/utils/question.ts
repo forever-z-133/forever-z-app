@@ -29,7 +29,7 @@ export async function askText(title: string): Promise<string> {
  * @param choices 选项列表，格式为 { value, name }
  * @returns 用户选择选择
  */
-export async function askChoice(title: string, choices: Choice[]): Promise<string> {
+export async function askChoice(title: string, choices: Choice[]): Promise<any> {
   const result = await inquirer.prompt([
     {
       type: 'list',
@@ -44,4 +44,21 @@ export async function askChoice(title: string, choices: Choice[]): Promise<strin
 export interface Choice {
   name: string
   value: any
+}
+
+/**
+ * 确认是否
+ * @returns boolean
+ */
+export async function askConfirm(title: string): Promise<boolean> {
+  const result = await inquirer.prompt([
+    {
+
+      type: 'confirm',
+      name: 'confirm',
+      message: title,
+    },
+  ])
+  const { confirm } = result || {}
+  return confirm
 }

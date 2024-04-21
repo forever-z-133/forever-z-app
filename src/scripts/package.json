@@ -11,6 +11,7 @@
     "rename": "cross-env RUN_BY=scripts tsx src/renameCodes.ts",
     "remove": "cross-env RUN_BY=scripts tsx src/removeCodes.ts",
     "exist": "cross-env RUN_BY=scripts tsx src/existCodes.ts",
+    "concat": "cross-env RUN_BY=scripts tsx src/concatVideo.ts",
     "test": "echo hello world"
   },
   "devDependencies": {

@@ -41,6 +41,11 @@ program
   .action(code => run('exist', code))
 
 program
+  .command('concat')
+  .description('合并多个视频文件')
+  .action(() => run('concat'))
+
+program
   .command('test')
   .description('测试脚本')
   .argument('[args...]', '测试脚本的入参')
