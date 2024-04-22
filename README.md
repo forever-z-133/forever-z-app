@@ -53,7 +53,7 @@ pnpm config set electron_builder_binaries_mirror "https://mirrors.huaweicloud.co
   - [x] 番号名称规范化
   - [x] 番号名称规范检查
   - [x] 番号查找
-  - [ ] 番号链接提取
+  - [x] 番号链接提取
   - [x] 番号删除并缓存进已下载
   - [x] 影片合并
   - [ ] 删除空文件夹

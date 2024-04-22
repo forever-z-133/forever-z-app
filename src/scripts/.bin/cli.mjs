@@ -46,6 +46,12 @@ program
   .action(() => run('concat'))
 
 program
+  .command('pick')
+  .description('提取文件中未下载的番号链接')
+  .argument('[file...]', '需查找的番号')
+  .action(args => run('pick', args.join(' ')))
+
+program
   .command('test')
   .description('测试脚本')
   .argument('[args...]', '测试脚本的入参')
