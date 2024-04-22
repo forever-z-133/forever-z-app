@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { normalize, parse } from 'node:path'
 import chalk from 'chalk'
+import { badCodeDirs, codeDirs, waitCodeDirs } from '../config'
 import { convertCodeName, getCodeName, removeCodeNamePart } from './utils/codeName'
 import { getAllCodeFiles } from './utils/getAllCodeFiles'
 import { askText } from './utils/question'
@@ -11,12 +12,14 @@ interface PickLinkData {
 }
 
 // 获取所有番号，转为对象方便比对是否已下载
-const allFiles = getAllCodeFiles()
-const codeMap = allFiles.reduce((re, file) => {
-  const code = removeCodeNamePart(parse(file).name)
-  re[code] = true
-  return re
-}, {} as { [code: string]: boolean })
+const allFiles = getAllCodeFiles(codeDirs)
+const badFiles = getAllCodeFiles(badCodeDirs) // 已下载的，但不好看的
+const waitFiles = getAllCodeFiles(waitCodeDirs) // 下载过的，但有异常的
+const codeMap = {} as { [code: string]: boolean | undefined }
+const getCode = (file: string) => removeCodeNamePart(parse(file).name)
+allFiles.forEach(file => codeMap[getCode(file)] = true)
+badFiles.forEach(file => codeMap[getCode(file)] = false)
+waitFiles.forEach(file => codeMap[getCode(file)] = undefined)
 
 /**
  * 提取番号
@@ -42,21 +45,32 @@ function getPickLinkData(entryFile: string) {
 
 // 拆分番号，进行展示
 function logPickLinkData(linkData: PickLinkData[]) {
-  // 番号错误的
-  const errors = linkData.filter(({ code }) => !code)
-  // 已下载的
-  const include = linkData.filter(({ code }) => code && codeMap[code] === true)
-  // 未下载的
-  const exclude = linkData.filter(({ code }) => code && codeMap[code] !== true)
+  const errors: PickLinkData[] = [] // 番号错误的
+  const include: PickLinkData[] = [] // 已下载的
+  const bad: PickLinkData[] = [] // 不好看的
+  const exclude: PickLinkData[] = [] // 未下载的
 
+  // 进行分类
+  linkData.forEach((data) => {
+    const { code } = data
+    if (!code) errors.push(data)
+    else if (codeMap[code] === true) include.push(data)
+    else if (codeMap[code] === false) bad.push(data)
+    else exclude.push(data)
+  })
+
+  // 按顺序打印结果
   include.forEach(({ code, link }) => {
     console.log(chalk.green('已下载'), code.padEnd(12, ' '), link)
+  })
+  bad.forEach(({ code, link }) => {
+    console.log(chalk.grey('不好看'), code.padEnd(12, ' '), link)
   })
   exclude.forEach(({ code, link }) => {
     console.log(chalk.yellow('未下载'), code.padEnd(12, ' '), link)
   })
   errors.forEach(({ code, link }) => {
-    console.log(chalk.yellow('错误'), code.padEnd(12, ' '), link)
+    console.log(chalk.magenta('错误'), code.padEnd(12, ' '), link)
   })
 }
 

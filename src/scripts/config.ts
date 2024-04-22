@@ -1,15 +1,8 @@
 /**
- * 番号所在的文件夹
+ * 下载过（好看但有异常）的番号所在的文件夹
  */
-export const codeDirs = [
-  // 'E:/test',
+export const waitCodeDirs = [
   'F:/坏',
-  'E:/下载2',
-  'E:/下载3',
-  'F:/无码',
-  'F:/有码',
-  'F:/麻豆',
-  'F:/写真',
 ]
 
 /**
@@ -17,6 +10,19 @@ export const codeDirs = [
  */
 export const badCodeDirs = [
   'F:/下载过',
+]
+
+/**
+ * 番号所在的文件夹
+ */
+export const codeDirs = [
+  // 'E:/test',
+  'E:/下载2',
+  'E:/下载3',
+  'F:/无码',
+  'F:/有码',
+  'F:/麻豆',
+  'F:/写真',
 ]
 
 /**

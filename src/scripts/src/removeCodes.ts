@@ -2,7 +2,7 @@ import { join, parse } from 'node:path'
 import { writeFileSync } from 'node:fs'
 import chalk from 'chalk'
 import trash from 'trash'
-import { badCodeDirs, codeDirs } from '../config'
+import { badCodeDirs, codeDirs, waitCodeDirs } from '../config'
 import { getAllCodeFiles } from './utils/getAllCodeFiles'
 import type { Choice } from './utils/question'
 import { askChoice, askText } from './utils/question'
@@ -14,7 +14,7 @@ const getRemoveCodesData: GetRemoveCodesData = (needRemoveCode) => {
   const originCode = needRemoveCode.toLocaleUpperCase()
 
   // 获取所有番号文件
-  const codeFiles = getAllCodeFiles(codeDirs)
+  const codeFiles = getAllCodeFiles(codeDirs.concat(waitCodeDirs))
   const badFiles = getAllCodeFiles(badCodeDirs)
 
   // 找出相同的番号，以及可删除的番号
