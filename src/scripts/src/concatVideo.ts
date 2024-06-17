@@ -23,7 +23,7 @@ const tmpDir = resolve(thisDir, 'dist')
 const tmpFile = resolve(tmpDir, 'concat-video.txt')
 
 // 找到 1.mp4 2.mp4 等文件
-const VideoReg = /\.(mp4|rmvb|avi|wmv|mkv)$/
+const VideoReg = /\.(?:mp4|rmvb|avi|wmv|mkv)$/
 function getVideoFiles(dir: string) {
   const result: MatchVideoData[] = []
   const isVideo = (name: string) => VideoReg.test(name)

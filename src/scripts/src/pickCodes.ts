@@ -23,7 +23,7 @@ waitFiles.forEach(file => codeMap[getCode(file)] = undefined)
 
 /**
  * 提取番号
- * @example: forZ pick 'F:\种子\冲田杏梨沖田杏梨観月あかねAnnri Okita.txt'
+ * @example: forZ pick 'G:\种子\冲田杏梨沖田杏梨観月あかねAnnri Okita.txt'
  */
 
 // 提取番号，返回番号和链接

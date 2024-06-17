@@ -1,7 +1,7 @@
 import { addZero, isNumberString } from './index'
 
-const d_d_reg = /\d{4,}[-_]\d{3,}\w*/ // 匹配 110313-691
-const w_d_reg = /\d{0,2}\w+[-_]\w?\d{2,}[A-E]?/i // 匹配 MKBD-S60 RED-195 21ID-008 RED-195A
+const d_d_reg = /\d{4,}[-_]\d{3}\w*/ // 匹配 110313-691
+const w_d_reg = /\w+[-_]\w?\d{2,}[A-E]?/i // 匹配 MKBD-S60 RED-195 21ID-008 RED-195A
 const fc2_reg = /fc2[-_ ]?(ppv[-_ ]?)?\d{6,}/i // 匹配 FC2-271499 FC2-PPV-271499
 
 /**
@@ -17,7 +17,7 @@ export function getCodeName(link: string): string {
 }
 
 const codeNameDivideReg = /add|-|_/
-const codeNameNumberReg = /^(S)?(\d{2,7})(un|p)?([_-](\d))?([A-E])?.*/
+const codeNameNumberReg = /^(S)?(\d{2,7})(un|p)?([_-](\d))?([A-E])?/
 /**
  * 转化为标准番号
  * @example: 'snisadd432un' 转为 'SNIS-432'
